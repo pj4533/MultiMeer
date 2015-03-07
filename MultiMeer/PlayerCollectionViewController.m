@@ -130,8 +130,44 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+- (void)muteAll {
+    for (StreamController* stream in _streams) {
+        [stream muteVolume];
+    }
+}
+
+- (void)unmuteAll {
+    for (StreamController* stream in _streams) {
+        [stream unmuteVolume];
+    }
+}
+
+- (BOOL)isAllPlaying {
+    for (StreamController* stream in _streams) {
+        if ([stream isMuted]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 #pragma mark <UICollectionViewDelegate>
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    StreamController* stream = _streams[indexPath.item];
+
+    if ([self isAllPlaying]) {
+        [self muteAll];
+        [stream unmuteVolume];
+    } else {
+        if ([stream isMuted]) {
+            [self muteAll];
+            [stream unmuteVolume];
+        } else {
+            [self unmuteAll];
+        }
+    }
+}
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

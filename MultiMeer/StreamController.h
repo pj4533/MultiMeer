@@ -20,6 +20,10 @@
 - (instancetype)initWithURL:(NSURL*)url withId:(NSString*)streamId;
 - (void)playStreamOnLayer:(CALayer*)layer;
 
+- (BOOL)isMuted;
+- (void)muteVolume;
+- (void)unmuteVolume;
+
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) NSString* streamId;
 

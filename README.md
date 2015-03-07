@@ -17,9 +17,12 @@ pod install
 
 Then run in XCode.
 
+## Usage
+
+- Tap a cell to listen to just that stream, tap again to listen to everything
+
 ## TODO
 
--  Controls for sound
 -  Tap to show just one stream
 -  Maybe make this a mac desktop app, rather than iOS?
 
