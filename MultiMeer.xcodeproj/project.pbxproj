@@ -1,0 +1,498 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */; };
+		0A595E121AAB5C5900CA559B /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E111AAB5C5900CA559B /* StreamController.m */; };
+		0AA400231AAB37DA0070F7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400221AAB37DA0070F7EF /* main.m */; };
+		0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400251AAB37DA0070F7EF /* AppDelegate.m */; };
+		0AA4002C1AAB37DA0070F7EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002A1AAB37DA0070F7EF /* Main.storyboard */; };
+		0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002D1AAB37DA0070F7EF /* Images.xcassets */; };
+		0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002F1AAB37DA0070F7EF /* LaunchScreen.xib */; };
+		0AA4003D1AAB37DA0070F7EF /* MultiMeerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */; };
+		19FC9EB793A6E4675F02A738 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C801F7B36942BC3A321B0E7 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0AA400371AAB37DA0070F7EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AA400151AAB37DA0070F7EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0AA4001C1AAB37DA0070F7EF;
+			remoteInfo = MultiMeer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0A595E0D1AAB47EA00CA559B /* PlayerCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCollectionViewController.h; sourceTree = "<group>"; };
+		0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCollectionViewController.m; sourceTree = "<group>"; };
+		0A595E101AAB5C5900CA559B /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamController.h; sourceTree = "<group>"; };
+		0A595E111AAB5C5900CA559B /* StreamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamController.m; sourceTree = "<group>"; };
+		0AA4001D1AAB37DA0070F7EF /* MultiMeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiMeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AA400211AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AA400221AAB37DA0070F7EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0AA400241AAB37DA0070F7EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0AA400251AAB37DA0070F7EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0AA4002B1AAB37DA0070F7EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0AA4002D1AAB37DA0070F7EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0AA400301AAB37DA0070F7EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0AA400361AAB37DA0070F7EF /* MultiMeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiMeerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AA4003B1AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeerTests.m; sourceTree = "<group>"; };
+		3C801F7B36942BC3A321B0E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		61E8B642975F0E3D9811E7F9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DC5CCF9D4E73FEC125532CC1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0AA4001A1AAB37DA0070F7EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19FC9EB793A6E4675F02A738 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AA400331AAB37DA0070F7EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0AA400141AAB37DA0070F7EF = {
+			isa = PBXGroup;
+			children = (
+				0AA4001F1AAB37DA0070F7EF /* MultiMeer */,
+				0AA400391AAB37DA0070F7EF /* MultiMeerTests */,
+				0AA4001E1AAB37DA0070F7EF /* Products */,
+				1ED4BC316E3BA339C83204EA /* Pods */,
+				4E4D9DA5B07589C3F72CA5F5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0AA4001E1AAB37DA0070F7EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0AA4001D1AAB37DA0070F7EF /* MultiMeer.app */,
+				0AA400361AAB37DA0070F7EF /* MultiMeerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0AA4001F1AAB37DA0070F7EF /* MultiMeer */ = {
+			isa = PBXGroup;
+			children = (
+				0AA400241AAB37DA0070F7EF /* AppDelegate.h */,
+				0AA400251AAB37DA0070F7EF /* AppDelegate.m */,
+				0A595E0D1AAB47EA00CA559B /* PlayerCollectionViewController.h */,
+				0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */,
+				0AA4002A1AAB37DA0070F7EF /* Main.storyboard */,
+				0AA4002D1AAB37DA0070F7EF /* Images.xcassets */,
+				0AA4002F1AAB37DA0070F7EF /* LaunchScreen.xib */,
+				0AA400201AAB37DA0070F7EF /* Supporting Files */,
+				0A595E101AAB5C5900CA559B /* StreamController.h */,
+				0A595E111AAB5C5900CA559B /* StreamController.m */,
+			);
+			path = MultiMeer;
+			sourceTree = "<group>";
+		};
+		0AA400201AAB37DA0070F7EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0AA400211AAB37DA0070F7EF /* Info.plist */,
+				0AA400221AAB37DA0070F7EF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0AA400391AAB37DA0070F7EF /* MultiMeerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */,
+				0AA4003A1AAB37DA0070F7EF /* Supporting Files */,
+			);
+			path = MultiMeerTests;
+			sourceTree = "<group>";
+		};
+		0AA4003A1AAB37DA0070F7EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0AA4003B1AAB37DA0070F7EF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1ED4BC316E3BA339C83204EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC5CCF9D4E73FEC125532CC1 /* Pods.debug.xcconfig */,
+				61E8B642975F0E3D9811E7F9 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4E4D9DA5B07589C3F72CA5F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C801F7B36942BC3A321B0E7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0AA4001C1AAB37DA0070F7EF /* MultiMeer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0AA400401AAB37DA0070F7EF /* Build configuration list for PBXNativeTarget "MultiMeer" */;
+			buildPhases = (
+				A1DDAB634F6AB44B91D65209 /* Check Pods Manifest.lock */,
+				0AA400191AAB37DA0070F7EF /* Sources */,
+				0AA4001A1AAB37DA0070F7EF /* Frameworks */,
+				0AA4001B1AAB37DA0070F7EF /* Resources */,
+				E1F6828C2CA4F6867D6FECC0 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultiMeer;
+			productName = MultiMeer;
+			productReference = 0AA4001D1AAB37DA0070F7EF /* MultiMeer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0AA400351AAB37DA0070F7EF /* MultiMeerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0AA400431AAB37DA0070F7EF /* Build configuration list for PBXNativeTarget "MultiMeerTests" */;
+			buildPhases = (
+				0AA400321AAB37DA0070F7EF /* Sources */,
+				0AA400331AAB37DA0070F7EF /* Frameworks */,
+				0AA400341AAB37DA0070F7EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0AA400381AAB37DA0070F7EF /* PBXTargetDependency */,
+			);
+			name = MultiMeerTests;
+			productName = MultiMeerTests;
+			productReference = 0AA400361AAB37DA0070F7EF /* MultiMeerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0AA400151AAB37DA0070F7EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Say Goodnight Software";
+				TargetAttributes = {
+					0AA4001C1AAB37DA0070F7EF = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					0AA400351AAB37DA0070F7EF = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 0AA4001C1AAB37DA0070F7EF;
+					};
+				};
+			};
+			buildConfigurationList = 0AA400181AAB37DA0070F7EF /* Build configuration list for PBXProject "MultiMeer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0AA400141AAB37DA0070F7EF;
+			productRefGroup = 0AA4001E1AAB37DA0070F7EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0AA4001C1AAB37DA0070F7EF /* MultiMeer */,
+				0AA400351AAB37DA0070F7EF /* MultiMeerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0AA4001B1AAB37DA0070F7EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AA4002C1AAB37DA0070F7EF /* Main.storyboard in Resources */,
+				0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */,
+				0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AA400341AAB37DA0070F7EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1DDAB634F6AB44B91D65209 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1F6828C2CA4F6867D6FECC0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0AA400191AAB37DA0070F7EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */,
+				0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */,
+				0AA400231AAB37DA0070F7EF /* main.m in Sources */,
+				0A595E121AAB5C5900CA559B /* StreamController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0AA400321AAB37DA0070F7EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AA4003D1AAB37DA0070F7EF /* MultiMeerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0AA400381AAB37DA0070F7EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0AA4001C1AAB37DA0070F7EF /* MultiMeer */;
+			targetProxy = 0AA400371AAB37DA0070F7EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0AA4002A1AAB37DA0070F7EF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AA4002B1AAB37DA0070F7EF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0AA4002F1AAB37DA0070F7EF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AA400301AAB37DA0070F7EF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0AA4003E1AAB37DA0070F7EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		0AA4003F1AAB37DA0070F7EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0AA400411AAB37DA0070F7EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC5CCF9D4E73FEC125532CC1 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MultiMeer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0AA400421AAB37DA0070F7EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61E8B642975F0E3D9811E7F9 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MultiMeer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0AA400441AAB37DA0070F7EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MultiMeerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiMeer.app/MultiMeer";
+			};
+			name = Debug;
+		};
+		0AA400451AAB37DA0070F7EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MultiMeerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MultiMeer.app/MultiMeer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AA400181AAB37DA0070F7EF /* Build configuration list for PBXProject "MultiMeer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AA4003E1AAB37DA0070F7EF /* Debug */,
+				0AA4003F1AAB37DA0070F7EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0AA400401AAB37DA0070F7EF /* Build configuration list for PBXNativeTarget "MultiMeer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AA400411AAB37DA0070F7EF /* Debug */,
+				0AA400421AAB37DA0070F7EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0AA400431AAB37DA0070F7EF /* Build configuration list for PBXNativeTarget "MultiMeerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AA400441AAB37DA0070F7EF /* Debug */,
+				0AA400451AAB37DA0070F7EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0AA400151AAB37DA0070F7EF /* Project object */;
+}
