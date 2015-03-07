@@ -57,9 +57,13 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSInteger itemIndex = _streams.count;
                     StreamController* streamController = [[StreamController alloc] initWithURL:url withId:stream[@"id"]];
                     streamController.delegate = self;
+                    if ((_streams.count > 1) && ([self isSingleStreamPlaying])) {
+                        [streamController muteVolume];
+                    }
                     
                     [addedIndexPaths addObject:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
                     [_streams addObject:streamController];
+                    
                     dispatch_group_leave(group);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     dispatch_group_leave(group);
@@ -142,6 +146,21 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+- (BOOL)isSingleStreamPlaying {
+    NSInteger numberPlaying = 0;
+    for (StreamController* stream in _streams) {
+        if (![stream isMuted]) {
+            numberPlaying++;
+        }
+    }
+    
+    if (numberPlaying == 1) {
+        return YES;
+    }
+    
+    return NO;
+    
+}
 - (BOOL)isAllPlaying {
     for (StreamController* stream in _streams) {
         if ([stream isMuted]) {
