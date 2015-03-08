@@ -9,6 +9,8 @@
 #import "PlayerCollectionViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import "StreamController.h"
+#import "StreamSummary.h"
+#import "StreamCell.h"
 
 @interface PlayerCollectionViewController () <StreamControllerDelegate> {
     NSMutableArray* _streams;
@@ -26,10 +28,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
+        
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
                                    selector:@selector(checkForNewStreams)
@@ -47,16 +46,18 @@ static NSString * const reuseIdentifier = @"Cell";
         NSArray* results = responseObject[@"result"];
         dispatch_group_t group = dispatch_group_create();
         NSMutableArray* addedIndexPaths = @[].mutableCopy;
+        
         for (NSDictionary* stream in results) {
             
-            if (![self streamsContainsId:stream[@"id"]]) {
-                dispatch_group_enter(group);
-                [manager GET:stream[@"broadcast"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    if ([responseObject[@"result"][@"status"] isEqualToString:@"live"]) {
-                        NSURL* url = [NSURL URLWithString:responseObject[@"followupActions"][@"playlist"]];
-                        
+            dispatch_group_enter(group);
+            [manager GET:stream[@"broadcast"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                StreamSummary* summary = [MTLJSONAdapter modelOfClass:StreamSummary.class fromJSONDictionary:responseObject error:nil];
+                
+                NSInteger streamIndex = [self indexForStreamId:stream[@"id"]];
+                if (streamIndex == -1) {
+                    if ([summary.status isEqualToString:@"live"]) {
                         NSInteger itemIndex = _streams.count;
-                        StreamController* streamController = [[StreamController alloc] initWithURL:url withId:stream[@"id"]];
+                        StreamController* streamController = [[StreamController alloc] initWithSummary:summary];
                         streamController.delegate = self;
                         if ((_streams.count > 1) && ([self isSingleStreamPlaying])) {
                             [streamController muteVolume];
@@ -65,11 +66,16 @@ static NSString * const reuseIdentifier = @"Cell";
                         [addedIndexPaths addObject:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
                         [_streams addObject:streamController];
                     }
-                    dispatch_group_leave(group);
-                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    dispatch_group_leave(group);
-                }];
-            }
+                } else {
+                    StreamController* stream = _streams[streamIndex];
+                    stream.summary = summary;
+                    stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@ watching", stream.summary.watchersCount];
+                }
+                
+                dispatch_group_leave(group);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                dispatch_group_leave(group);
+            }];
         }
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
             [self.collectionView performBatchUpdates:^{
@@ -81,10 +87,10 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
 }
 
-- (NSInteger)indexForStream:(StreamController*)stream {
+- (NSInteger)indexForStreamId:(NSString*)streamId {
     NSInteger index = 0;
     for (StreamController* thisStream in _streams) {
-        if ([stream.streamId isEqualToString:thisStream.streamId]) {
+        if ([streamId isEqualToString:thisStream.summary.streamId]) {
             return index;
         }
         index++;
@@ -92,14 +98,6 @@ static NSString * const reuseIdentifier = @"Cell";
     return -1;
 }
 
-- (BOOL)streamsContainsId:(NSString*)streamId {
-    for (StreamController* stream in _streams) {
-        if ([stream.streamId isEqualToString:streamId]) {
-            return YES;
-        }
-    }
-    return NO;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -127,10 +125,16 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    StreamCell *cell = (StreamCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
     
     StreamController* streamController = _streams[indexPath.item];
+    streamController.cell = cell;
     [streamController playStreamOnLayer:cell.contentView.layer];
+
+    cell.watchersLabel.text = [NSString stringWithFormat:@"%@ watching", streamController.summary.watchersCount];
+    cell.captionLabel.text = streamController.summary.caption;
+    cell.locationLabel.text = streamController.summary.location;
     
     return cell;
 }
@@ -221,7 +225,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)didFinishPlayingWithStream:(StreamController *)stream {
     
-    NSInteger itemIndex = [self indexForStream:stream];
+    NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
     if (itemIndex != -1) {
         [self.collectionView performBatchUpdates:^{
             
@@ -243,7 +247,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)didBecomeReadyToPlayWithStream:(StreamController *)stream {
-    NSInteger itemIndex = [self indexForStream:stream];
+    NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
     if (itemIndex != -1) {
         [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:itemIndex inSection:0]]];
     }

@@ -7,6 +7,7 @@
 //
 
 #import "StreamController.h"
+#import "StreamSummary.h"
 #import <AVFoundation/AVFoundation.h>
 
 static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
@@ -14,20 +15,17 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 @interface StreamController () {
     AVPlayer* _player;
     AVPlayerItem* _playerItem;
-    AVPlayerLayer* _playerLayer;
-    
-    NSURL* _url;
+    AVPlayerLayer* _playerLayer;    
 }
 
 @end
 
 @implementation StreamController
 
-- (instancetype)initWithURL:(NSURL*)url withId:(NSString*)streamId {
+- (instancetype)initWithSummary:(StreamSummary*)summary {
     self = [super init];
     if (self) {
-        _url = url;
-        _streamId = streamId;
+        _summary = summary;
         [self tryLoading];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -72,7 +70,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                  it has not tried to load new media resources for playback */
             case AVPlayerItemStatusUnknown:
             {
-                NSLog(@"UNKNOWN: %@", _url);
+                NSLog(@"UNKNOWN: %@", self.summary.playlistURL);
             }
                 break;
                 
@@ -83,7 +81,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                  its duration can be fetched from the item. */
                 
                 if (self.delegate && !_playerLayer) {
-                    NSLog(@"READY BECOME READY: %@", _url);
+                    NSLog(@"READY BECOME READY: %@", self.summary.playlistURL);
                     [self.delegate didBecomeReadyToPlayWithStream:self];
                 }
                 
@@ -138,7 +136,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
     [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
     
-    _playerItem = [AVPlayerItem playerItemWithURL:_url];
+    _playerItem = [AVPlayerItem playerItemWithURL:self.summary.playlistURL];
     _playerItem.preferredPeakBitRate = 10;
     
     _player = [[AVPlayer alloc] initWithPlayerItem:_playerItem];

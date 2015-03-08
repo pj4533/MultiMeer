@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1306431AAC90C100C18A60 /* StreamSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1306421AAC90C100C18A60 /* StreamSummary.m */; };
+		0A1306461AACA08700C18A60 /* StreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1306451AACA08700C18A60 /* StreamCell.m */; };
 		0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */; };
 		0A595E121AAB5C5900CA559B /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E111AAB5C5900CA559B /* StreamController.m */; };
 		0AA400231AAB37DA0070F7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400221AAB37DA0070F7EF /* main.m */; };
@@ -29,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1306411AAC90C100C18A60 /* StreamSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamSummary.h; sourceTree = "<group>"; };
+		0A1306421AAC90C100C18A60 /* StreamSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamSummary.m; sourceTree = "<group>"; };
+		0A1306441AACA08700C18A60 /* StreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamCell.h; sourceTree = "<group>"; };
+		0A1306451AACA08700C18A60 /* StreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamCell.m; sourceTree = "<group>"; };
 		0A595E0D1AAB47EA00CA559B /* PlayerCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerCollectionViewController.h; sourceTree = "<group>"; };
 		0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCollectionViewController.m; sourceTree = "<group>"; };
 		0A595E101AAB5C5900CA559B /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamController.h; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 		0AA4001F1AAB37DA0070F7EF /* MultiMeer */ = {
 			isa = PBXGroup;
 			children = (
+				0AD9EFFD1AAC8F3F00F3F197 /* Models */,
 				0AA400241AAB37DA0070F7EF /* AppDelegate.h */,
 				0AA400251AAB37DA0070F7EF /* AppDelegate.m */,
 				0A595E0D1AAB47EA00CA559B /* PlayerCollectionViewController.h */,
@@ -101,6 +108,8 @@
 				0AA400201AAB37DA0070F7EF /* Supporting Files */,
 				0A595E101AAB5C5900CA559B /* StreamController.h */,
 				0A595E111AAB5C5900CA559B /* StreamController.m */,
+				0A1306441AACA08700C18A60 /* StreamCell.h */,
+				0A1306451AACA08700C18A60 /* StreamCell.m */,
 			);
 			path = MultiMeer;
 			sourceTree = "<group>";
@@ -129,6 +138,15 @@
 				0AA4003B1AAB37DA0070F7EF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0AD9EFFD1AAC8F3F00F3F197 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A1306411AAC90C100C18A60 /* StreamSummary.h */,
+				0A1306421AAC90C100C18A60 /* StreamSummary.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1ED4BC316E3BA339C83204EA /* Pods */ = {
@@ -283,6 +301,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1306431AAC90C100C18A60 /* StreamSummary.m in Sources */,
+				0A1306461AACA08700C18A60 /* StreamCell.m in Sources */,
 				0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */,
 				0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */,
 				0AA400231AAB37DA0070F7EF /* main.m in Sources */,
@@ -362,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -398,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
