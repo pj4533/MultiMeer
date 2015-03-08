@@ -26,7 +26,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     self = [super init];
     if (self) {
         _summary = summary;
-        [self tryLoading];
+        [self initializePlayer];
     }
     return self;
 }
@@ -34,6 +34,10 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 - (void)playStreamOnLayer:(CALayer*)layer {
 
     if (_playerLayer) {
+        if (_playerLayer.superlayer == layer) {
+            return;
+        }
+        
         [_playerLayer removeFromSuperlayer];
     }
     
@@ -100,14 +104,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     [_playerLayer removeFromSuperlayer];
 }
 
-- (void)tryLoading {
-    if (_playerLayer) {
-        [_playerLayer removeFromSuperlayer];
-    }
-    
-    [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
-    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
-    
+- (void)initializePlayer {
     _playerItem = [AVPlayerItem playerItemWithURL:self.summary.playlistURL];
     _playerItem.preferredPeakBitRate = 10;
     
