@@ -8,12 +8,15 @@
 
 #import <Mantle/Mantle.h>
 
+@class Broadcaster;
 @interface StreamSummary : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy, readonly) NSString* streamId;
 @property (nonatomic, copy, readonly) NSString* status;
 @property (nonatomic, copy, readonly) NSString* caption;
 @property (nonatomic, copy, readonly) NSString* location;
+
+@property (nonatomic, copy, readonly) Broadcaster* broadcaster;
 
 @property (nonatomic, copy, readonly) NSNumber* watchersCount;
 @property (nonatomic, copy, readonly) NSNumber* commentsCount;

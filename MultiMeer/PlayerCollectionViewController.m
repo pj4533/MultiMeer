@@ -69,7 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
                 } else {
                     StreamController* stream = _streams[streamIndex];
                     stream.summary = summary;
-                    stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@ watching", stream.summary.watchersCount];
+                    stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@", stream.summary.watchersCount];
                 }
                 
                 dispatch_group_leave(group);
@@ -130,11 +130,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     StreamController* streamController = _streams[indexPath.item];
     streamController.cell = cell;
-    [streamController playStreamOnLayer:cell.contentView.layer];
+    [streamController playStreamOnLayer:cell.streamPlaybackView.layer];
 
-    cell.watchersLabel.text = [NSString stringWithFormat:@"%@ watching", streamController.summary.watchersCount];
-    cell.captionLabel.text = streamController.summary.caption;
-    cell.locationLabel.text = streamController.summary.location;
+    cell.watchersLabel.text = [NSString stringWithFormat:@"%@", streamController.summary.watchersCount];
     
     return cell;
 }

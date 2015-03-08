@@ -7,6 +7,7 @@
 //
 
 #import "StreamSummary.h"
+#import "Broadcaster.h"
 
 @implementation StreamSummary
 
@@ -21,6 +22,7 @@
              @"likesCount": @"result.likesCount",
              @"restreamsCount": @"result.restreamsCount",
              @"commentsCount": @"result.commentsCount",
+             @"broadcaster": @"result.broadcaster",
              @"playlistURL": @"followupActions.playlist"
              };
 }
@@ -31,6 +33,18 @@
 
 + (NSValueTransformer *)playlistURLJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)broadcasterJSONTransformer {
+    return [MTLValueTransformer
+            reversibleTransformerWithForwardBlock:^ id (id JSONDictionary) {
+                if ((JSONDictionary == nil) || ![JSONDictionary isKindOfClass:NSDictionary.class]) return nil;
+                return [MTLJSONAdapter modelOfClass:Broadcaster.class fromJSONDictionary:JSONDictionary error:NULL];
+            }
+            reverseBlock:^ id (id model) {
+                if (model == nil) return nil;
+                return [MTLJSONAdapter JSONDictionaryFromModel:model];
+            }];
 }
 
 @end

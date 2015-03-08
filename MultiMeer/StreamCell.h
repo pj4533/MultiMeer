@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *watchersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UIView *streamPlaybackView;
 
 @end
