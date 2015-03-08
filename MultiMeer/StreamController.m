@@ -82,6 +82,11 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
             case AVPlayerItemStatusFailed:
             {
                 NSLog(@"AVPlayerItemStatusFailed");
+                
+                sleep(5);
+                [self uninitializePlayerItem];
+                [self initializePlayerItem];
+                [_player replaceCurrentItemWithPlayerItem:_playerItem];
             }
                 break;
         }
@@ -93,18 +98,10 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     }
 }
 
-- (void)uninitializePlayer {
-    [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
-    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
-    
-    [_playerLayer removeFromSuperlayer];
-}
-
-- (void)initializePlayer {
+- (void)initializePlayerItem {
     _playerItem = [AVPlayerItem playerItemWithURL:self.summary.playlistURL];
     _playerItem.preferredPeakBitRate = 10;
     
-    _player = [[AVPlayer alloc] initWithPlayerItem:_playerItem];
     [_playerItem addObserver:self
                   forKeyPath:@"status"
                      options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
@@ -113,6 +110,22 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                   forKeyPath:@"playbackLikelyToKeepUp"
                      options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                      context:nil];
+}
+
+- (void)uninitializePlayerItem {
+    [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
+    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
+    
+}
+
+- (void)uninitializePlayer {
+    [self uninitializePlayerItem];
+    [_playerLayer removeFromSuperlayer];
+}
+
+- (void)initializePlayer {
+    [self initializePlayerItem];
+    _player = [[AVPlayer alloc] initWithPlayerItem:_playerItem];
 }
 
 - (void)prerollAndPlay {
