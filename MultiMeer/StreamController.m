@@ -76,21 +76,11 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                         [self.delegate didBecomeReadyToPlayWithStream:self];
                     });
                 }
-                
-//                [self prerollAndPlay];
             }
                 break;
                 
             case AVPlayerItemStatusFailed:
             {
-                [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
-                [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
-                
-                if (self.delegate) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate didFinishPlayingWithStream:self];
-                    });
-                }
             }
                 break;
         }

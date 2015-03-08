@@ -268,24 +268,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - StreamControllerDelegate
 
-- (void)didFinishPlayingWithStream:(StreamController *)stream {
-    
-    
-//    [self.collectionView performBatchUpdates:^{
-//        
-//        NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
-//        [self.collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] animated:YES];
-//        if (itemIndex != -1) {
-//            NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
-//            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
-//            [_streams removeObjectsAtIndexes:indexSet];
-//            // Now delete the items from the collection view.
-//            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
-//        }
-//        
-//    } completion:nil];
-}
-
 - (void)didBecomeReadyToPlayWithStream:(StreamController *)stream {
     NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
     if (itemIndex != -1) {

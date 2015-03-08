@@ -13,7 +13,6 @@
 @class StreamCell;
 @protocol StreamControllerDelegate <NSObject>
 - (void)didBecomeReadyToPlayWithStream:(StreamController*)stream;
-- (void)didFinishPlayingWithStream:(StreamController*)stream;
 @end
 
 @interface StreamController : NSObject
