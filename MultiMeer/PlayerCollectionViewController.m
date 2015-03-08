@@ -52,18 +52,19 @@ static NSString * const reuseIdentifier = @"Cell";
             if (![self streamsContainsId:stream[@"id"]]) {
                 dispatch_group_enter(group);
                 [manager GET:stream[@"broadcast"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSURL* url = [NSURL URLWithString:responseObject[@"followupActions"][@"playlist"]];
-                    
-                    NSInteger itemIndex = _streams.count;
-                    StreamController* streamController = [[StreamController alloc] initWithURL:url withId:stream[@"id"]];
-                    streamController.delegate = self;
-                    if ((_streams.count > 1) && ([self isSingleStreamPlaying])) {
-                        [streamController muteVolume];
+                    if ([responseObject[@"result"][@"status"] isEqualToString:@"live"]) {
+                        NSURL* url = [NSURL URLWithString:responseObject[@"followupActions"][@"playlist"]];
+                        
+                        NSInteger itemIndex = _streams.count;
+                        StreamController* streamController = [[StreamController alloc] initWithURL:url withId:stream[@"id"]];
+                        streamController.delegate = self;
+                        if ((_streams.count > 1) && ([self isSingleStreamPlaying])) {
+                            [streamController muteVolume];
+                        }
+                        
+                        [addedIndexPaths addObject:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
+                        [_streams addObject:streamController];
                     }
-                    
-                    [addedIndexPaths addObject:[NSIndexPath indexPathForItem:itemIndex inSection:0]];
-                    [_streams addObject:streamController];
-                    
                     dispatch_group_leave(group);
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     dispatch_group_leave(group);

@@ -123,6 +123,8 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
     [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
 
+    [_playerLayer removeFromSuperlayer];
+    
     if (self.delegate) {
         [self.delegate didFinishPlayingWithStream:self];
     }
