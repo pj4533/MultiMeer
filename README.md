@@ -9,7 +9,7 @@ It will update every 5 seconds looking for new streams, and remove old busted st
 
 ## How do I run this?
 
-Probably will only work in the simulator, since it uses a ton of memory. Also, if there are alot of streams, it will use quite a bit of bandwidth. So...yeah. But hey, if you wanna learn about AVFoundation or just hack on some video code, have at it.
+I tested on my iPad Air, and it did seem to work...but haven't done extensive testing. Also, if there are alot of streams, it will use quite a bit of bandwidth. So...yeah. But hey, if you wanna learn about AVFoundation or just hack on some video code, have at it.
 
 ```
 pod install

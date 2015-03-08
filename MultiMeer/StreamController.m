@@ -81,6 +81,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                 
             case AVPlayerItemStatusFailed:
             {
+                NSLog(@"AVPlayerItemStatusFailed");
             }
                 break;
         }
