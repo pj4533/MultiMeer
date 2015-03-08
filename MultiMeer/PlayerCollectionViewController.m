@@ -105,7 +105,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
                     NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
                     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
-                    [stream unregister];
+                    [stream uninitializePlayer];
                     [_streams removeObjectsAtIndexes:indexSet];
                     // Now delete the items from the collection view.
                     [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
@@ -241,7 +241,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     StreamController* stream = _streams[indexPath.item];
-    
+
     _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
     _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
     [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];

@@ -34,16 +34,12 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 - (void)playStreamOnLayer:(CALayer*)layer {
 
     if (_playerLayer) {
-        if (_playerLayer.superlayer == layer) {
-            return;
-        }
-        
-        [_playerLayer removeFromSuperlayer];
+        _playerLayer = nil;
     }
     
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     _playerLayer.frame = CGRectMake(0, 0, 150, 150);
-
+    
     [layer addSublayer:_playerLayer];
 }
 
@@ -97,7 +93,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     }
 }
 
-- (void)unregister {
+- (void)uninitializePlayer {
     [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
     [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
     
