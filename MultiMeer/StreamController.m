@@ -82,7 +82,9 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                 
                 if (self.delegate && !_playerLayer) {
                     NSLog(@"READY BECOME READY: %@", self.summary.playlistURL);
-                    [self.delegate didBecomeReadyToPlayWithStream:self];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate didBecomeReadyToPlayWithStream:self];
+                    });
                 }
                 
 //                [self prerollAndPlay];
@@ -99,8 +101,10 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                 [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
                 
                 if (self.delegate) {
-                    [self.delegate didFinishPlayingWithStream:self];
-                }                
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate didFinishPlayingWithStream:self];
+                    });
+                }
             }
                 break;
         }
@@ -124,7 +128,9 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     [_playerLayer removeFromSuperlayer];
     
     if (self.delegate) {
-        [self.delegate didFinishPlayingWithStream:self];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate didFinishPlayingWithStream:self];
+        });
     }
 }
 
