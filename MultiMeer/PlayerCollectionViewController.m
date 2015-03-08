@@ -33,7 +33,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-        
+    
+    self.title = @"MultiMeer";
+    
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
                                    selector:@selector(checkForNewStreams)
@@ -75,6 +77,13 @@ static NSString * const reuseIdentifier = @"Cell";
                     StreamController* stream = _streams[streamIndex];
                     stream.summary = summary;
                     stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@", stream.summary.watchersCount];
+                    
+                    if (self.collectionView.indexPathsForSelectedItems.count == 1) {
+                        NSIndexPath* selectedIndexPath = self.collectionView.indexPathsForSelectedItems[0];
+                        if (streamIndex == selectedIndexPath.item) {
+                            _currentHeader.watchersLabel.text = [NSString stringWithFormat:@"%@ now watching", stream.summary.watchersCount];
+                        }
+                    }
                 }
                 
                 dispatch_group_leave(group);
@@ -190,13 +199,22 @@ static NSString * const reuseIdentifier = @"Cell";
     return reusableview;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    StreamController* stream = _streams[indexPath.item];
+    stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     StreamController* stream = _streams[indexPath.item];
     
     _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
     _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
     [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];
-
+    _currentHeader.captionLabel.text = stream.summary.caption;
+    _currentHeader.locationLabel.text = stream.summary.location;
+    _currentHeader.watchersLabel.text = [NSString stringWithFormat:@"%@ now watching", stream.summary.watchersCount];
+    
+    stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    
     if ([self isAllPlaying]) {
         [self muteAll];
         [stream unmuteVolume];
@@ -205,44 +223,20 @@ static NSString * const reuseIdentifier = @"Cell";
             [self muteAll];
             [stream unmuteVolume];
         } else {
+            [collectionView deselectItemAtIndexPath:indexPath animated:YES];
             [self unmuteAll];
         }
     }
 }
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
 
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 #pragma mark - StreamControllerDelegate
 
 - (void)didFinishPlayingWithStream:(StreamController *)stream {
     
     NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
+    [self.collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] animated:YES];
+    
     if (itemIndex != -1) {
         [self.collectionView performBatchUpdates:^{
             
