@@ -8,12 +8,17 @@
 
 #import "PlayerCollectionViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
+
 #import "StreamController.h"
 #import "StreamSummary.h"
 #import "StreamCell.h"
+#import "StreamHeader.h"
+#import "Broadcaster.h"
 
 @interface PlayerCollectionViewController () <StreamControllerDelegate> {
     NSMutableArray* _streams;
+    StreamHeader* _currentHeader;
 }
 
 @end
@@ -174,9 +179,23 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark <UICollectionViewDelegate>
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        _currentHeader = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"StreamHeader" forIndexPath:indexPath];
+        reusableview = _currentHeader;
+    }
+    
+    return reusableview;
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     StreamController* stream = _streams[indexPath.item];
+    
+    _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
+    _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
+    [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];
 
     if ([self isAllPlaying]) {
         [self muteAll];

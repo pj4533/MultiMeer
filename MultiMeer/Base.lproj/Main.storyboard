@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="epk-aE-Pcn">
                             <size key="itemSize" width="150" height="150"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="0.0" height="68"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
@@ -44,6 +44,32 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StreamHeader" id="5OY-pu-QJk" customClass="StreamHeader">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9i-s5-om0">
+                                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4q-sc-3qz">
+                                    <rect key="frame" x="66" y="8" width="249" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.89525462962962965" green="0.89525462962962965" blue="0.89525462962962965" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIJ-gq-Kgv">
+                                    <rect key="frame" x="66" y="27" width="249" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.58608217592592593" green="0.58608217592592593" blue="0.58608217592592593" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <connections>
+                                <outlet property="avatarImageView" destination="E9i-s5-om0" id="8lG-9a-IHn"/>
+                                <outlet property="broadcasterDisplayNameLabel" destination="n4q-sc-3qz" id="ACP-JP-FIw"/>
+                                <outlet property="broadcasterNameLabel" destination="hIJ-gq-Kgv" id="Mbp-eF-ebT"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="Aou-6V-bIB" id="NAw-id-ZKa"/>
                             <outlet property="delegate" destination="Aou-6V-bIB" id="kg8-RZ-XXm"/>
