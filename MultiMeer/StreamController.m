@@ -15,7 +15,8 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 @interface StreamController () {
     AVPlayer* _player;
     AVPlayerItem* _playerItem;
-    AVPlayerLayer* _playerLayer;    
+    AVPlayerLayer* _playerLayer;
+    BOOL _didRetry;
 }
 
 @end
@@ -82,11 +83,17 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
             case AVPlayerItemStatusFailed:
             {
                 NSLog(@"AVPlayerItemStatusFailed");
-                
-                sleep(5);
-                [self uninitializePlayerItem];
-                [self initializePlayerItem];
-                [_player replaceCurrentItemWithPlayerItem:_playerItem];
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+                    sleep(5);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!_didRetry) {
+                            [self uninitializePlayerItem];
+                            [self initializePlayerItem];
+                            [_player replaceCurrentItemWithPlayerItem:_playerItem];
+                            _didRetry = YES;
+                        }
+                    });
+                });
             }
                 break;
         }
