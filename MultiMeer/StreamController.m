@@ -27,16 +27,6 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     if (self) {
         _summary = summary;
         [self tryLoading];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(itemDidFinishPlaying:)
-                                                     name:AVPlayerItemPlaybackStalledNotification
-                                                   object:_playerItem];
-        
-        
-        
-        
-        
     }
     return self;
 }
@@ -93,10 +83,6 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                 
             case AVPlayerItemStatusFailed:
             {
-                [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                                name:AVPlayerItemPlaybackStalledNotification
-                                                              object:_playerItem];
-
                 [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
                 [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
                 
@@ -116,25 +102,14 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     }
 }
 
--(void)itemDidFinishPlaying:(NSNotification *) notification {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:AVPlayerItemPlaybackStalledNotification
-                                                  object:_playerItem];
-    
+- (void)unregister {
     [_playerItem removeObserver:self forKeyPath:@"status" context:PlayerStatusObservationContext];
     [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
-
-    [_playerLayer removeFromSuperlayer];
     
-    if (self.delegate) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate didFinishPlayingWithStream:self];
-        });
-    }
+    [_playerLayer removeFromSuperlayer];
 }
 
--(void)tryLoading {
+- (void)tryLoading {
     if (_playerLayer) {
         [_playerLayer removeFromSuperlayer];
     }

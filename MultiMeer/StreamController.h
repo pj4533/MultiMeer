@@ -24,6 +24,7 @@
 - (BOOL)isMuted;
 - (void)muteVolume;
 - (void)unmuteVolume;
+- (void)unregister;
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) StreamSummary* summary;

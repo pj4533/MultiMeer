@@ -82,7 +82,7 @@
                                     <color key="textColor" red="0.89525462962962965" green="0.89525462962962965" blue="0.89525462962962965" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Derp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSK-Qa-RN9" userLabel="Caption">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSK-Qa-RN9" userLabel="Caption">
                                     <rect key="frame" x="248" y="8" width="344" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="TRA-61-mlm"/>
@@ -111,7 +111,7 @@
                                     <color key="textColor" red="0.5860821759" green="0.5860821759" blue="0.5860821759" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Derp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2Y-0d-Rw5" userLabel="Location">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2Y-0d-Rw5" userLabel="Location">
                                     <rect key="frame" x="248" y="27" width="344" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="Qar-Oh-K75"/>

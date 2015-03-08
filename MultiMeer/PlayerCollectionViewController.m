@@ -38,13 +38,13 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [NSTimer scheduledTimerWithTimeInterval:5.0
                                      target:self
-                                   selector:@selector(checkForNewStreams)
+                                   selector:@selector(streamUpdateTick)
                                    userInfo:nil
                                     repeats:YES];
-    [self checkForNewStreams];
+    [self streamUpdateTick];
 }
 
-- (void)checkForNewStreams {
+- (void)streamUpdateTick {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
     responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
@@ -95,6 +95,27 @@ static NSString * const reuseIdentifier = @"Cell";
                 dispatch_group_leave(group);
             }];
         }
+        
+        NSArray* liveStreamIds = [results valueForKeyPath:@"id"];
+        NSArray* currentStreams = _streams.copy;
+        for (StreamController* stream in currentStreams) {
+            if (![liveStreamIds containsObject:stream.summary.streamId]) {
+                dispatch_group_enter(group);
+                [self.collectionView performBatchUpdates:^{
+                    NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
+                    NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
+                    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
+                    [stream unregister];
+                    [_streams removeObjectsAtIndexes:indexSet];
+                    // Now delete the items from the collection view.
+                    [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+                    
+                } completion:^(BOOL finished) {
+                    dispatch_group_leave(group);
+                }];
+            }
+        }
+        
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
             NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"summary.watchersCount"  ascending:NO];
             NSArray* sortedArray = [_streams sortedArrayUsingDescriptors:@[descriptor]];
@@ -250,19 +271,19 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didFinishPlayingWithStream:(StreamController *)stream {
     
     
-    [self.collectionView performBatchUpdates:^{
-        
-        NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
-        [self.collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] animated:YES];
-        if (itemIndex != -1) {
-            NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
-            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
-            [_streams removeObjectsAtIndexes:indexSet];
-            // Now delete the items from the collection view.
-            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
-        }
-        
-    } completion:nil];
+//    [self.collectionView performBatchUpdates:^{
+//        
+//        NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
+//        [self.collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:itemIndex inSection:0] animated:YES];
+//        if (itemIndex != -1) {
+//            NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
+//            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
+//            [_streams removeObjectsAtIndexes:indexSet];
+//            // Now delete the items from the collection view.
+//            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+//        }
+//        
+//    } completion:nil];
 }
 
 - (void)didBecomeReadyToPlayWithStream:(StreamController *)stream {
