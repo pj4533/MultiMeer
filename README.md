@@ -26,7 +26,8 @@ Then run in XCode.
 -  Run on iPhone, with 75px streams
 -  Tap to show just one stream
 -  Maybe push to AppStore for external Testflight testing
--  Some way to jump into the "real" stream 
+-  Some way to jump into the "real" stream
+-  Code is super messy, especially the main view controller.  
 
 ## Contact
 
