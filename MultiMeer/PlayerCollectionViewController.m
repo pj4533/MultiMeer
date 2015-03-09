@@ -34,6 +34,10 @@ static NSString * const reuseIdentifier = @"Cell";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        ((UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout).itemSize = CGSizeMake(75.0f, 75.0f);
+    }
+    
     self.title = @"MultiMeer";
     
     [NSTimer scheduledTimerWithTimeInterval:5.0
