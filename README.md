@@ -9,6 +9,8 @@ It will update every 5 seconds looking for new streams, and remove old busted st
 
 ## How do I run this?
 
+I submitted this to Apple Testflight for external testing, so I'll have 1000 slots when/if it is approved.
+
 I tested on my iPad Air, and it did seem to work...but haven't done extensive testing. Also, if there are alot of streams, it will use quite a bit of bandwidth. So...yeah. But hey, if you wanna learn about AVFoundation or just hack on some video code, have at it.
 
 ```
@@ -23,11 +25,10 @@ Then run in XCode.
 
 ## TODO
 
--  Run on iPhone, with 75px streams
 -  Tap to show just one stream
--  Maybe push to AppStore for external Testflight testing
 -  Some way to jump into the "real" stream
 -  Code is super messy, especially the main view controller.  
+-  Several bugs -- see issues
 
 ## Contact
 
