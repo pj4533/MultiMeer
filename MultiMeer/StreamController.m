@@ -39,7 +39,14 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     }
     
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-    _playerLayer.frame = CGRectMake(0, 0, 150, 150);
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        _playerLayer.frame = CGRectMake(0, 0, 75, 75);
+    } else {
+        _playerLayer.frame = CGRectMake(0, 0, 150, 150);
+    }
+
     
     [layer addSublayer:_playerLayer];
 }

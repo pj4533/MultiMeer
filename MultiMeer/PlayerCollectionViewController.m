@@ -185,6 +185,11 @@ static NSString * const reuseIdentifier = @"Cell";
     streamController.cell = cell;
     [streamController playStreamOnLayer:cell.streamPlaybackView.layer];
 
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        cell.watchersLabel.font = [UIFont systemFontOfSize:12.0];
+    }
+    
     cell.watchersLabel.text = [NSString stringWithFormat:@"%@", streamController.summary.watchersCount];
     cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
 
