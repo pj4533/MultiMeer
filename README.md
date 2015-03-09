@@ -23,8 +23,11 @@ Then run in XCode.
 
 ## TODO
 
+-  Run on iPhone, with 75px streams
 -  Tap to show just one stream
--  Maybe make this a mac desktop app, rather than iOS?
+-  Maybe push to AppStore for external Testflight testing
+-  Some way to jump into the "real" stream
+-  Code is super messy, especially the main view controller.  
 
 ## Contact
 
