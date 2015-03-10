@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class StreamController;
+@protocol StreamCellDelegate <NSObject>
+
+- (void)didReportStream:(StreamController*)stream;
+
+@end
+
 @interface StreamCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *watchersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIView *streamPlaybackView;
+
+@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) StreamController* stream;
 
 @end

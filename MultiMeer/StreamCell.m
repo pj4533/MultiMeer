@@ -9,5 +9,10 @@
 #import "StreamCell.h"
 
 @implementation StreamCell
+- (IBAction)reportTapped:(id)sender {
+    if (self.delegate) {
+        [self.delegate didReportStream:self.stream];
+    }
+}
 
 @end

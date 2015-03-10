@@ -16,7 +16,7 @@
 #import "StreamHeader.h"
 #import "Broadcaster.h"
 
-@interface PlayerCollectionViewController () <StreamControllerDelegate> {
+@interface PlayerCollectionViewController () <StreamControllerDelegate,StreamCellDelegate> {
     NSMutableArray* _streams;
     StreamHeader* _currentHeader;
 }
@@ -35,7 +35,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        ((UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout).itemSize = CGSizeMake(75.0f, 75.0f);
+        ((UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout).itemSize = CGSizeMake(90.0f, 75.0f);
     }
     
     self.title = @"MultiMeer";
@@ -185,6 +185,8 @@ static NSString * const reuseIdentifier = @"Cell";
     streamController.cell = cell;
     [streamController playStreamOnLayer:cell.streamPlaybackView.layer];
 
+    cell.delegate = self;
+    cell.stream = streamController;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         cell.watchersLabel.font = [UIFont systemFontOfSize:12.0];
@@ -283,5 +285,46 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:itemIndex inSection:0]]];
     }
 }
+
+#pragma mark - StreamCellDelegate
+
+- (void)didReportStream:(StreamController *)stream {
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Report"
+                                  message:@"Report this stream?"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action) {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             
+                             NSString* urlString = [NSString stringWithFormat:@"https://channels.meerkatapp.co/broadcasts/%@/reports", stream.summary.streamId];
+                             NSDictionary* params = @{@"auth":stream.summary.streamId};
+                             
+                             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+                             responseSerializer.acceptableContentTypes = [responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+                             [manager setResponseSerializer:responseSerializer];
+                             [manager POST:urlString parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSLog(@"%@", responseObject);
+                             } failure:nil];
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end
