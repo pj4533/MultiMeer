@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class StreamController;
 @interface StreamHeader : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *broadcasterNameLabel;
@@ -15,5 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *watchersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+
+// Dont like this -- hack
+@property (weak, nonatomic) StreamController* stream;
+
 
 @end

@@ -253,12 +253,22 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     StreamController* stream = _streams[indexPath.item];
 
+    _currentHeader.stream = stream;
     _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
     _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
     [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];
     _currentHeader.captionLabel.text = stream.summary.caption;
     _currentHeader.locationLabel.text = stream.summary.location;
     _currentHeader.watchersLabel.text = [NSString stringWithFormat:@"%@ now watching", stream.summary.watchersCount];
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"meerkat://live/%@", stream.summary.streamId]];
+
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(tappedActionButton)];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+
     
     stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
     
@@ -326,5 +336,33 @@ static NSString * const reuseIdentifier = @"Cell";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)tappedActionButton {
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Open"
+                                  message:@"Goto this stream in Meerkat?"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action) {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"meerkat://live/%@", _currentHeader.stream.summary.streamId]];
+                             
+                             [[UIApplication sharedApplication] openURL:url];
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end
