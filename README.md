@@ -23,7 +23,8 @@ Then run in XCode.
 
 ## Usage
 
-- Tap a cell to listen to just that stream, tap again to listen to everything
+- Tap a cell to listen to just that stream & see details on broadcaster, tap again to listen to everything
+- Tap action icon in nav bar to view the stream in the Meerkat app
 
 ## TODO
 
