@@ -145,7 +145,19 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 
 }
 
+- (BOOL)playing {
+    if (_player) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (BOOL)isMuted {
+    if (!_player) {
+        return YES;
+    }
+    
     if (_player.volume == 0.0) {
         return YES;
     }
@@ -153,10 +165,18 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 }
 
 - (void)muteVolume {
+    if (!_player) {
+        return;
+    }
+    
     [_player setVolume:0.0];
 }
 
 - (void)unmuteVolume {
+    if (!_player) {
+        return;
+    }
+
     [_player setVolume:1.0];
 }
 

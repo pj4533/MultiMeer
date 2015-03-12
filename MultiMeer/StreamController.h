@@ -20,6 +20,7 @@
 
 - (instancetype)initWithSummary:(StreamSummary*)summary;
 
+- (BOOL)playing;
 - (BOOL)isMuted;
 - (void)muteVolume;
 - (void)unmuteVolume;
