@@ -29,11 +29,14 @@ Then run in XCode.
 ## TODO
 
 -  Show loading indicator
--  Limit # of streams playing at once
 -  Code is super messy, especially the main view controller.  
 -  Several bugs -- see issues
 
 ## Release Notes
+
+###  v1.0.0 (5)
+-  Loads cover image while buffering stream
+-  Limits # of streams to play (configurable in system settings, 10 as default)
 
 ###  v1.0.0 (4)
 -  Added scheme support for jumping to Meerkat app from MultiMeer
