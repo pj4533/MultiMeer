@@ -12,18 +12,20 @@
 @class StreamSummary;
 @class StreamCell;
 @protocol StreamControllerDelegate <NSObject>
-- (void)didBecomeReadyToPlayWithStream:(StreamController*)stream;
+- (void)didBecomeLikelyToKeepUp:(StreamController*)stream;
+- (void)didBecomeUnlikelyToKeepUp:(StreamController*)stream;
 @end
 
 @interface StreamController : NSObject
 
 - (instancetype)initWithSummary:(StreamSummary*)summary;
-- (void)playStreamOnLayer:(CALayer*)layer;
 
 - (BOOL)isMuted;
 - (void)muteVolume;
 - (void)unmuteVolume;
-- (void)uninitializePlayer;
+
+- (void)initializePlayer;
+- (void)uninitializePlayerWithCompletion:(void (^)(BOOL completed))completion;
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) StreamSummary* summary;

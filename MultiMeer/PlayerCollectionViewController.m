@@ -109,7 +109,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
                     NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForItem:itemIndex inSection:0]];
                     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itemIndex];
-                    [stream uninitializePlayer];
+                    [stream uninitializePlayerWithCompletion:nil];
                     [_streams removeObjectsAtIndexes:indexSet];
                     // Now delete the items from the collection view.
                     [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
@@ -133,6 +133,21 @@ static NSString * const reuseIdentifier = @"Cell";
                 }
             } completion:^(BOOL finished) {
                 _streams = sortedArray.mutableCopy;
+                
+                NSInteger maxPlayingStreams = 10;
+                for (NSInteger i = 0; i < maxPlayingStreams; i++) {
+                    StreamController* stream = _streams[i];
+                    [stream initializePlayer];
+                }
+                
+                for (NSInteger i = maxPlayingStreams; i < _streams.count; i++) {
+                    StreamController* stream = _streams[i];
+                    [stream uninitializePlayerWithCompletion:^(BOOL completed) {
+                        if (completed) {
+                            [self fadeInCoverToImageView:stream.cell.coverImageView withStream:stream];
+                        }
+                    }];
+                }
             }];
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -166,37 +181,30 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark Image Control
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+- (void)fadeInCoverToImageView:(UIImageView*)imageView withStream:(StreamController*)stream {
+    imageView.alpha = 0.0f;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:stream.summary.coverURL];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    __weak UIImageView* weakImageView = imageView;
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        __strong UIImageView* strongImageView = weakImageView;
+        strongImageView.image = image;
+        [UIView animateWithDuration:0.3 animations:^{
+            strongImageView.alpha = 1.0f;
+        }];
+    } failure:nil];
 }
 
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _streams.count;
+- (void)fadeOutCoverToImageView:(UIImageView*)imageView {
+    [UIView animateWithDuration:1 animations:^{
+        imageView.alpha = 0.0f;
+    }];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    StreamCell *cell = (StreamCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    
-    StreamController* streamController = _streams[indexPath.item];
-    streamController.cell = cell;
-    [streamController playStreamOnLayer:cell.streamPlaybackView.layer];
-
-    cell.delegate = self;
-    cell.stream = streamController;
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        cell.watchersLabel.font = [UIFont systemFontOfSize:12.0];
-    }
-    
-    cell.watchersLabel.text = [NSString stringWithFormat:@"%@", streamController.summary.watchersCount];
-    cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
-
-    return cell;
-}
+#pragma mark Audio Control
 
 - (void)muteAll {
     for (StreamController* stream in _streams) {
@@ -232,6 +240,42 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     }
     return YES;
+}
+
+#pragma mark <UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _streams.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    StreamCell *cell = (StreamCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    cell.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
+
+    StreamController* streamController = _streams[indexPath.item];
+    
+    [self fadeInCoverToImageView:cell.coverImageView withStream:streamController];
+
+    // This is kind of gross
+    streamController.cell = cell;
+
+    cell.delegate = self;
+    cell.stream = streamController;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        cell.watchersLabel.font = [UIFont systemFontOfSize:12.0];
+    }
+    
+    cell.watchersLabel.text = [NSString stringWithFormat:@"%@", streamController.summary.watchersCount];
+    cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
+
+    return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -289,11 +333,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - StreamControllerDelegate
 
-- (void)didBecomeReadyToPlayWithStream:(StreamController *)stream {
-    NSInteger itemIndex = [self indexForStreamId:stream.summary.streamId];
-    if (itemIndex != -1) {
-        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:itemIndex inSection:0]]];
-    }
+- (void)didBecomeLikelyToKeepUp:(StreamController *)stream {
+    [self fadeOutCoverToImageView:stream.cell.coverImageView];
+}
+
+- (void)didBecomeUnlikelyToKeepUp:(StreamController *)stream {
+    [self fadeInCoverToImageView:stream.cell.coverImageView withStream:stream];
 }
 
 #pragma mark - StreamCellDelegate

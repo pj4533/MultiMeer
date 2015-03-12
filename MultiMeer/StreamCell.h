@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIView *streamPlaybackView;
+@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 
 @property (weak, nonatomic) id delegate;
 @property (weak, nonatomic) StreamController* stream;
