@@ -34,7 +34,7 @@ Then run in XCode.
 
 ## Release Notes
 
-###  v1.0.0 (7)
+###  v1.0.0 (8)
 -  Fixed stupid audio bug (was testing late at night without sound, ha)
 
 ###  v1.0.0 (6)
