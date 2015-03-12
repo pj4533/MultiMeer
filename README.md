@@ -28,9 +28,7 @@ Then run in XCode.
 
 ## TODO
 
--  Show loading indicator
--  Code is super messy, especially the main view controller.  
--  Several bugs -- see issues
+-  Tracking all enhancements/bugs in issues
 
 ## Release Notes
 
