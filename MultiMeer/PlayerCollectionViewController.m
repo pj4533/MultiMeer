@@ -226,7 +226,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (BOOL)isSingleStreamPlaying {
     NSInteger numberPlaying = 0;
     for (StreamController* stream in _streams) {
-        if (![stream isMuted] && [stream playing]) {
+        if (![stream isMuted]) {
             numberPlaying++;
         }
     }
