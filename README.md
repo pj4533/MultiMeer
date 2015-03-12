@@ -34,7 +34,7 @@ Then run in XCode.
 
 ## Release Notes
 
-###  v1.0.0 (5)
+###  v1.0.0 (6)
 -  Loads cover image while buffering stream
 -  Limits # of streams to play (configurable in system settings, 10 as default)
 
