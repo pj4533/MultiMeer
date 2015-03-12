@@ -134,7 +134,8 @@ static NSString * const reuseIdentifier = @"Cell";
             } completion:^(BOOL finished) {
                 _streams = sortedArray.mutableCopy;
                 
-                NSInteger maxPlayingStreams = 10;
+                NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
+                NSInteger maxPlayingStreams = liveStreams.integerValue;
                 for (NSInteger i = 0; i < maxPlayingStreams; i++) {
                     StreamController* stream = _streams[i];
                     [stream initializePlayer];

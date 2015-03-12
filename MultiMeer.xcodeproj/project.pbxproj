@@ -13,6 +13,7 @@
 		0A595E121AAB5C5900CA559B /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E111AAB5C5900CA559B /* StreamController.m */; };
 		0A6CAE4C1AACB8AE0018C8D2 /* Broadcaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */; };
 		0A6CAE4F1AACC2E20018C8D2 /* StreamHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4E1AACC2E20018C8D2 /* StreamHeader.m */; };
+		0A9A45341AB14E2500785EC0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A9A45331AB14E2500785EC0 /* Settings.bundle */; };
 		0AA400231AAB37DA0070F7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400221AAB37DA0070F7EF /* main.m */; };
 		0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400251AAB37DA0070F7EF /* AppDelegate.m */; };
 		0AA4002C1AAB37DA0070F7EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002A1AAB37DA0070F7EF /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Broadcaster.m; sourceTree = "<group>"; };
 		0A6CAE4D1AACC2E20018C8D2 /* StreamHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamHeader.h; sourceTree = "<group>"; };
 		0A6CAE4E1AACC2E20018C8D2 /* StreamHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamHeader.m; sourceTree = "<group>"; };
+		0A9A45331AB14E2500785EC0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0AA4001D1AAB37DA0070F7EF /* MultiMeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiMeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA400211AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA400221AAB37DA0070F7EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				0AA400211AAB37DA0070F7EF /* Info.plist */,
 				0AA400221AAB37DA0070F7EF /* main.m */,
+				0A9A45331AB14E2500785EC0 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9A45341AB14E2500785EC0 /* Settings.bundle in Resources */,
 				0AA4002C1AAB37DA0070F7EF /* Main.storyboard in Resources */,
 				0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */,
 				0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */,
