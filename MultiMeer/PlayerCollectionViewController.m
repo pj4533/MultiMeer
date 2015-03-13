@@ -149,9 +149,15 @@ static NSString * const reuseIdentifier = @"Cell";
                     maxPlayingStreams = _streams.count;
                 }
                 
+                BOOL singleStreamPlaying = [self isSingleStreamPlaying];
+                StreamController* soloedStream = [self audioSoloStream];
+                
                 for (NSInteger i = 0; i < maxPlayingStreams; i++) {
                     StreamController* stream = _streams[i];
                     [stream initializePlayer];
+                    if (singleStreamPlaying && ![stream.summary.streamId isEqualToString:soloedStream.summary.streamId]) {
+                        [stream muteVolume];
+                    }
                 }
                 
                 for (NSInteger i = maxPlayingStreams; i < _streams.count; i++) {
@@ -230,6 +236,15 @@ static NSString * const reuseIdentifier = @"Cell";
     for (StreamController* stream in _streams) {
         [stream unmuteVolume];
     }
+}
+
+- (StreamController*)audioSoloStream {
+    for (StreamController* stream in _streams) {
+        if (![stream isMuted]) {
+            return stream;
+        }
+    }
+    return nil;
 }
 
 - (BOOL)isSingleStreamPlaying {
