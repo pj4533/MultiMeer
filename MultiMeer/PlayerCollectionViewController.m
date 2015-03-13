@@ -85,7 +85,15 @@ static NSString * const reuseIdentifier = @"Cell";
                 } else {
                     StreamController* stream = _streams[streamIndex];
                     stream.summary = summary;
-                    stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@", stream.summary.watchersCount];
+                    if (stream.cell) {
+                        stream.cell.watchersLabel.text = [NSString stringWithFormat:@"%@", stream.summary.watchersCount];
+                    } else {
+                        [self.collectionView performBatchUpdates:^{
+                            [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:streamIndex inSection:0]]];
+                        } completion:^(BOOL finished) {
+                            
+                        }];
+                    }
                     
                     if (self.collectionView.indexPathsForSelectedItems.count == 1) {
                         NSIndexPath* selectedIndexPath = self.collectionView.indexPathsForSelectedItems[0];

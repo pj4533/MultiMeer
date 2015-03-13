@@ -58,7 +58,6 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
                 
             case AVPlayerItemStatusReadyToPlay:
             {
-                NSLog(@"READY BECOME READY: %@", self.summary.playlistURL);
             }
                 break;
                 
