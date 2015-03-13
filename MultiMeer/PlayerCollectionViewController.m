@@ -129,10 +129,10 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSInteger currentIndex = [self indexForStreamId:stream.summary.streamId];
                     if (currentIndex != sortedIndex) {
                         [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex inSection:0] toIndexPath:[NSIndexPath indexPathForItem:sortedIndex inSection:0]];
-                    }
+                    }                    
                 }
-            } completion:^(BOOL finished) {
                 _streams = sortedArray.mutableCopy;
+            } completion:^(BOOL finished) {
                 
                 NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
                 NSInteger maxPlayingStreams = liveStreams.integerValue;
@@ -260,16 +260,24 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     StreamCell *cell = (StreamCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.streamPlaybackView.layer.sublayers = @[];
+    cell.coverImageView.image = nil;
+    cell.watchersLabel.text = @"";
     
     cell.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
 
     StreamController* streamController = _streams[indexPath.item];
     
-    [self fadeInCoverToImageView:cell.coverImageView withStream:streamController];
 
     // This is kind of gross
     streamController.cell = cell;
 
+    [streamController addToLayer:cell.streamPlaybackView.layer];
+
+    if (![streamController playing]) {
+        [self fadeInCoverToImageView:cell.coverImageView withStream:streamController];
+    }
+    
     cell.delegate = self;
     cell.stream = streamController;
     

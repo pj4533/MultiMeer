@@ -87,6 +87,12 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     }
 }
 
+// step in getting rid of cacheing the cell?
+- (void)addToLayer:(CALayer*)layer {
+    [_playerLayer removeFromSuperlayer];
+    [layer addSublayer:_playerLayer];
+}
+
 - (void)initializePlayerItem {
     _playerItem = [AVPlayerItem playerItemWithURL:self.summary.playlistURL];
     _playerItem.preferredPeakBitRate = 10;

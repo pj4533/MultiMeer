@@ -28,6 +28,8 @@
 - (void)initializePlayer;
 - (void)uninitializePlayerWithCompletion:(void (^)(BOOL completed))completion;
 
+- (void)addToLayer:(CALayer*)layer;
+
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) StreamSummary* summary;
 
