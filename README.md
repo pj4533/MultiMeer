@@ -32,6 +32,9 @@ Then run in XCode.
 
 ## Release Notes
 
+###  v1.0.0 (11)
+-  Fixed lots of bugs when reordering cells
+
 ###  v1.0.0 (8)
 -  Fixed stupid audio bug (was testing late at night without sound, ha)
 
