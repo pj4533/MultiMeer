@@ -144,9 +144,9 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        _playerLayer.frame = CGRectMake(0, 0, 75, 75);
+        _playerLayer.frame = CGRectMake(0, 0, 100, 100);
     } else {
-        _playerLayer.frame = CGRectMake(0, 0, 150, 150);
+        _playerLayer.frame = CGRectMake(0, 0, 200, 200);
     }
 
 }

@@ -35,7 +35,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        ((UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout).itemSize = CGSizeMake(90.0f, 75.0f);
+        ((UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout).itemSize = CGSizeMake(115.0f, 100.0f);
     }
     
     self.title = @"MultiMeer";
@@ -55,6 +55,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [manager setResponseSerializer:responseSerializer];
     [manager GET:@"https://resources.meerkatapp.co/broadcasts" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray* results = responseObject[@"result"];
+        self.title = [NSString stringWithFormat:@"MultiMeer (%@ streams)", @(results.count)];
         dispatch_group_t group = dispatch_group_create();
         for (NSDictionary* stream in results) {
             
