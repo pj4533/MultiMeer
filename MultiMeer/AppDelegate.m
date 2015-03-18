@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Crashlytics startWithAPIKey:@"adb3f67386076613833f7624cb7a500321ddd830"];
     [self registerDefaultsFromSettingsBundle];
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;
 }

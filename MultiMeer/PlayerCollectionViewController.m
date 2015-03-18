@@ -8,6 +8,7 @@
 
 #import "PlayerCollectionViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import "StreamController.h"
@@ -29,6 +30,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [self showViewController:alertController sender:nil];
+    }
+
     _streams = @[].mutableCopy;
     
     // Uncomment the following line to preserve selection between presentations
@@ -145,6 +153,11 @@ static NSString * const reuseIdentifier = @"Cell";
                 
                 NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
                 NSInteger maxPlayingStreams = liveStreams.integerValue;
+                
+                if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+                    maxPlayingStreams = 1;
+                }
+                
                 if (maxPlayingStreams > _streams.count) {
                     maxPlayingStreams = _streams.count;
                 }
