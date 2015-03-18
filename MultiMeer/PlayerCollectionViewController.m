@@ -420,8 +420,15 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         
         if (indexPath.item >= maxPlayingStreams) {
-            _streamToForcePlay = stream;
-            [stream initializePlayer];
+            if (!_streamToForcePlay) {
+                _streamToForcePlay = stream;
+                [stream initializePlayer];
+            } else if (![stream.summary.streamId isEqualToString:_streamToForcePlay.summary.streamId]) {
+                [_streamToForcePlay uninitializePlayerWithCompletion:^(BOOL completed) {
+                    _streamToForcePlay = stream;
+                    [stream initializePlayer];
+                }];
+            }
         }
     } completion:nil];
 }
