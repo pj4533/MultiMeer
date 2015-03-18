@@ -21,7 +21,7 @@
     NSMutableArray* _streams;
     StreamHeader* _currentHeader;
     
-    NSNumber* _indexToForcePlay;
+    StreamController* _streamToForcePlay;
 }
 
 @end
@@ -33,12 +33,12 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _indexToForcePlay = nil;
+    _streamToForcePlay = nil;
     
     if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
         UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
         
-        [self showViewController:alertController sender:nil];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 
     _streams = @[].mutableCopy;
@@ -150,7 +150,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     NSInteger currentIndex = [self indexForStreamId:stream.summary.streamId];
                     if (currentIndex != sortedIndex) {
                         [self.collectionView moveItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex inSection:0] toIndexPath:[NSIndexPath indexPathForItem:sortedIndex inSection:0]];
-                    }                    
+                    }
                 }
                 _streams = sortedArray.mutableCopy;
             } completion:^(BOOL finished) {
@@ -166,7 +166,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     maxPlayingStreams = _streams.count;
                 }
                 
-                if (_indexToForcePlay) {
+                if (_streamToForcePlay) {
                     maxPlayingStreams--;
                 }
                 
@@ -174,15 +174,17 @@ static NSString * const reuseIdentifier = @"Cell";
                 StreamController* soloedStream = [self audioSoloStream];
                 
                 for (NSInteger i = 0; i < maxPlayingStreams; i++) {
-                    [self initializePlayerForIndex:i withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
+                    StreamController* stream = _streams[i];
+                    [self initializePlayerForStream:stream withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
                 }
                 
-                if (_indexToForcePlay) {
-                    [self initializePlayerForIndex:_indexToForcePlay.integerValue withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
+                if (_streamToForcePlay) {
+                    [self initializePlayerForStream:_streamToForcePlay withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
                 }
                 
+                NSInteger indexToForcePlay = [self indexForStreamId:_streamToForcePlay.summary.streamId];
                 for (NSInteger i = maxPlayingStreams; i < _streams.count; i++) {
-                    if (_indexToForcePlay && (_indexToForcePlay.integerValue == i)) {
+                    if (_streamToForcePlay && (indexToForcePlay == i)) {
                         continue;
                     }
                     
@@ -200,8 +202,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }];
 }
 
-- (void)initializePlayerForIndex:(NSInteger)index withSingleStreamPlaying:(BOOL)singleStreamPlaying withSoloedStream:(StreamController*)soloedStream {
-    StreamController* stream = _streams[index];
+- (void)initializePlayerForStream:(StreamController*)stream withSingleStreamPlaying:(BOOL)singleStreamPlaying withSoloedStream:(StreamController*)soloedStream {
     [stream initializePlayer];
     if (singleStreamPlaying && ![stream.summary.streamId isEqualToString:soloedStream.summary.streamId]) {
         [stream muteVolume];
@@ -370,56 +371,59 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     StreamController* stream = _streams[indexPath.item];
     stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    StreamController* stream = _streams[indexPath.item];
-
-    _currentHeader.stream = stream;
-    _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
-    _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
-    [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];
-    _currentHeader.captionLabel.text = stream.summary.caption;
-    _currentHeader.locationLabel.text = stream.summary.location;
-    _currentHeader.watchersLabel.text = [NSString stringWithFormat:@"%@ now watching", stream.summary.watchersCount];
-    
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"meerkat://live/%@", stream.summary.streamId]];
-
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(tappedActionButton)];
-    } else {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-
-    
-    stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
-    
-    if ([self isAllPlaying]) {
-        [self muteAll];
-        [stream unmuteVolume];
-    } else {
-        if ([stream isMuted]) {
+    [collectionView performBatchUpdates:^{
+        StreamController* stream = _streams[indexPath.item];
+        
+        _currentHeader.stream = stream;
+        _currentHeader.broadcasterDisplayNameLabel.text = stream.summary.broadcaster.displayName;
+        _currentHeader.broadcasterNameLabel.text = [NSString stringWithFormat:@"@%@", stream.summary.broadcaster.name];
+        [_currentHeader.avatarImageView setImageWithURL:stream.summary.broadcaster.imageURL];
+        _currentHeader.captionLabel.text = stream.summary.caption;
+        _currentHeader.locationLabel.text = stream.summary.location;
+        _currentHeader.watchersLabel.text = [NSString stringWithFormat:@"%@ now watching", stream.summary.watchersCount];
+        
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"meerkat://live/%@", stream.summary.streamId]];
+        
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(tappedActionButton)];
+        } else {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+        
+        
+        stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+        
+        if ([self isAllPlaying]) {
             [self muteAll];
             [stream unmuteVolume];
         } else {
-            stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
-            [self unmuteAll];
+            if ([stream isMuted]) {
+                [self muteAll];
+                [stream unmuteVolume];
+            } else {
+                stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.08 alpha:1.0];
+                [self unmuteAll];
+            }
         }
-    }
-    
-    NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
-    NSInteger maxPlayingStreams = liveStreams.integerValue;
-    
-    if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
-        maxPlayingStreams = 1;
-    }
-    
-    if (indexPath.item >= maxPlayingStreams) {
-        _indexToForcePlay = @(indexPath.item);        
-        [stream initializePlayer];
-    }
-
+        
+        NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
+        NSInteger maxPlayingStreams = liveStreams.integerValue;
+        
+        if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+            maxPlayingStreams = 1;
+        }
+        
+        if (indexPath.item >= maxPlayingStreams) {
+            _streamToForcePlay = stream;
+            [stream initializePlayer];
+        }
+    } completion:nil];
 }
 
 
