@@ -22,6 +22,7 @@
     StreamHeader* _currentHeader;
     
     StreamController* _streamToForcePlay;
+    BOOL _showedCellularWarning;
 }
 
 @end
@@ -35,11 +36,14 @@ static NSString * const reuseIdentifier = @"Cell";
     
     _streamToForcePlay = nil;
     
-    if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
-        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if ((status == AFNetworkReachabilityStatusReachableViaWWAN) && (!_showedCellularWarning)) {
+            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            _showedCellularWarning = YES;
+        }
+    }];
 
     _streams = @[].mutableCopy;
     
@@ -419,7 +423,9 @@ static NSString * const reuseIdentifier = @"Cell";
             maxPlayingStreams = 1;
         }
         
-        if (indexPath.item >= maxPlayingStreams) {
+        if ((indexPath.item >= maxPlayingStreams) ||
+            ((indexPath.item >= (maxPlayingStreams-1)) && (_streamToForcePlay)))
+        {
             if (!_streamToForcePlay) {
                 _streamToForcePlay = stream;
                 [stream initializePlayer];
