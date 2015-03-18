@@ -20,6 +20,8 @@
 @interface PlayerCollectionViewController () <StreamControllerDelegate,StreamCellDelegate> {
     NSMutableArray* _streams;
     StreamHeader* _currentHeader;
+    
+    NSNumber* _indexToForcePlay;
 }
 
 @end
@@ -30,6 +32,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _indexToForcePlay = nil;
     
     if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
         UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
@@ -162,18 +166,26 @@ static NSString * const reuseIdentifier = @"Cell";
                     maxPlayingStreams = _streams.count;
                 }
                 
+                if (_indexToForcePlay) {
+                    maxPlayingStreams--;
+                }
+                
                 BOOL singleStreamPlaying = [self isSingleStreamPlaying];
                 StreamController* soloedStream = [self audioSoloStream];
                 
                 for (NSInteger i = 0; i < maxPlayingStreams; i++) {
-                    StreamController* stream = _streams[i];
-                    [stream initializePlayer];
-                    if (singleStreamPlaying && ![stream.summary.streamId isEqualToString:soloedStream.summary.streamId]) {
-                        [stream muteVolume];
-                    }
+                    [self initializePlayerForIndex:i withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
+                }
+                
+                if (_indexToForcePlay) {
+                    [self initializePlayerForIndex:_indexToForcePlay.integerValue withSingleStreamPlaying:singleStreamPlaying withSoloedStream:soloedStream];
                 }
                 
                 for (NSInteger i = maxPlayingStreams; i < _streams.count; i++) {
+                    if (_indexToForcePlay && (_indexToForcePlay.integerValue == i)) {
+                        continue;
+                    }
+                    
                     StreamController* stream = _streams[i];
                     [stream uninitializePlayerWithCompletion:^(BOOL completed) {
                         if (completed) {
@@ -186,6 +198,14 @@ static NSString * const reuseIdentifier = @"Cell";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+}
+
+- (void)initializePlayerForIndex:(NSInteger)index withSingleStreamPlaying:(BOOL)singleStreamPlaying withSoloedStream:(StreamController*)soloedStream {
+    StreamController* stream = _streams[index];
+    [stream initializePlayer];
+    if (singleStreamPlaying && ![stream.summary.streamId isEqualToString:soloedStream.summary.streamId]) {
+        [stream muteVolume];
+    }
 }
 
 - (NSInteger)indexForStreamId:(NSString*)streamId {
@@ -387,6 +407,19 @@ static NSString * const reuseIdentifier = @"Cell";
             [self unmuteAll];
         }
     }
+    
+    NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
+    NSInteger maxPlayingStreams = liveStreams.integerValue;
+    
+    if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+        maxPlayingStreams = 1;
+    }
+    
+    if (indexPath.item >= maxPlayingStreams) {
+        _indexToForcePlay = @(indexPath.item);        
+        [stream initializePlayer];
+    }
+
 }
 
 
