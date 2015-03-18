@@ -12,6 +12,7 @@
 @protocol StreamCellDelegate <NSObject>
 
 - (void)didReportStream:(StreamController*)stream;
+- (void)didDoubleTapStream:(StreamController*)stream;
 
 @end
 

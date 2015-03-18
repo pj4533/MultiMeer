@@ -461,6 +461,15 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - StreamCellDelegate
 
+- (void)didDoubleTapStream:(StreamController *)stream {
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"meerkat://live/%@", stream.summary.streamId]];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        NSLog(@"Meerkat not installed.");
+    }
+}
+
 - (void)didReportStream:(StreamController *)stream {
     
     UIAlertController * alert=   [UIAlertController
