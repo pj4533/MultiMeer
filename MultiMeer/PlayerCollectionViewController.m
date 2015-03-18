@@ -38,9 +38,18 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if ((status == AFNetworkReachabilityStatusReachableViaWWAN) && (!_showedCellularWarning)) {
-            UIAlertController* alertController = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Limited to 1 stream using cellular networks." preferredStyle:UIAlertControllerStyleAlert];
             
-            [self presentViewController:alertController animated:YES completion:nil];
+            UIAlertAction* ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                     
+                                 }];
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
             _showedCellularWarning = YES;
         }
     }];
