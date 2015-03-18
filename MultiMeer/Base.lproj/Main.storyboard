@@ -28,7 +28,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="CG3-tU-pKY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="epk-aE-Pcn">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="epk-aE-Pcn" customClass="CSStickyHeaderFlowLayout">
                             <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="68"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -160,6 +160,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="FSK-Qa-RN9" firstAttribute="leading" secondItem="n4q-sc-3qz" secondAttribute="trailing" constant="8" id="0cg-BE-QXU"/>
                                 <constraint firstItem="R2Y-0d-Rw5" firstAttribute="top" secondItem="5OY-pu-QJk" secondAttribute="topMargin" constant="19" id="Bzs-JI-1c5"/>
