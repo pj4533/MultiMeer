@@ -7,24 +7,11 @@ Got bored, messed around with Meerkat. I like it, but wanted to see all the thin
 
 It will update every 5 seconds looking for new streams, and remove old busted streams.
 
-## Help Test!
-
-I have 1000 slots in the Testflight beta.  Find me via email/twitter/whatever, or go to this Google form for access:
-
-http://goo.gl/Xq8lpY
-
-I tested on my iPad Air, and it did seem to work...but haven't done extensive testing. Also, if there are alot of streams, it will use quite a bit of bandwidth. So...yeah. But hey, if you wanna learn about AVFoundation or just hack on some video code, have at it.
-
-```
-pod install
-```
-
-Then run in XCode.
-
 ## Usage
 
 - Tap a cell to listen to just that stream & see details on broadcaster, tap again to listen to everything
 - Tap action icon in nav bar to view the stream in the Meerkat app
+- App settings to change number of concurrent streams (defaults to 10)
 
 ## TODO
 
