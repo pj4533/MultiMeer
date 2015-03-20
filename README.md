@@ -32,6 +32,11 @@ Then run in XCode.
 
 ## Release Notes
 
+###  v1.0.0 (18)
+-  First App Store submission
+-  Limited to 1 stream when using cellular connection
+-  Can tap any stream to force play
+
 ###  v1.0.0 (12)
 -  Fixed annoying mute/solo audio issue
 
