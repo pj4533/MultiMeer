@@ -171,9 +171,9 @@ static NSString * const reuseIdentifier = @"Cell";
                 NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
                 NSInteger maxPlayingStreams = liveStreams.integerValue;
                 
-                if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+//                if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
                     maxPlayingStreams = 1;
-                }
+//                }
                 
                 if (maxPlayingStreams > _streams.count) {
                     maxPlayingStreams = _streams.count;

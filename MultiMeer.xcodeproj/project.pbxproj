@@ -20,6 +20,7 @@
 		0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002D1AAB37DA0070F7EF /* Images.xcassets */; };
 		0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002F1AAB37DA0070F7EF /* LaunchScreen.xib */; };
 		0AA4003D1AAB37DA0070F7EF /* MultiMeerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */; };
+		0AB4E85F1ABCC066008608AA /* MovieRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4E85E1ABCC066008608AA /* MovieRecorder.m */; };
 		0ADF2C181AB14C5100F83B26 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADF2C171AB14C5100F83B26 /* Crashlytics.framework */; };
 		19FC9EB793A6E4675F02A738 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C801F7B36942BC3A321B0E7 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		0AA400361AAB37DA0070F7EF /* MultiMeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiMeerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA4003B1AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeerTests.m; sourceTree = "<group>"; };
+		0AB4E85D1ABCC066008608AA /* MovieRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieRecorder.h; sourceTree = "<group>"; };
+		0AB4E85E1ABCC066008608AA /* MovieRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieRecorder.m; sourceTree = "<group>"; };
 		0ADF2C171AB14C5100F83B26 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3C801F7B36942BC3A321B0E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E8B642975F0E3D9811E7F9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 		0AA4001F1AAB37DA0070F7EF /* MultiMeer */ = {
 			isa = PBXGroup;
 			children = (
+				0AB4E85D1ABCC066008608AA /* MovieRecorder.h */,
+				0AB4E85E1ABCC066008608AA /* MovieRecorder.m */,
 				0AD9EFFD1AAC8F3F00F3F197 /* Models */,
 				0AA400241AAB37DA0070F7EF /* AppDelegate.h */,
 				0AA400251AAB37DA0070F7EF /* AppDelegate.m */,
@@ -335,6 +340,7 @@
 			files = (
 				0A1306431AAC90C100C18A60 /* StreamSummary.m in Sources */,
 				0A1306461AACA08700C18A60 /* StreamCell.m in Sources */,
+				0AB4E85F1ABCC066008608AA /* MovieRecorder.m in Sources */,
 				0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */,
 				0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */,
 				0AA400231AAB37DA0070F7EF /* main.m in Sources */,
