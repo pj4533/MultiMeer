@@ -285,12 +285,13 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
 
 #pragma mark MovieRecorder Delegate
 
-- (void)movieRecorderDidFinishPreparing:(MovieRecorder *)recorder
-{
+- (void)movieRecorderDidFinishPreparing:(MovieRecorder *)recorder {
 }
 
-- (void)movieRecorder:(MovieRecorder *)recorder didFailWithError:(NSError *)error
-{
+- (void)movieRecorder:(MovieRecorder *)recorder didFailWithError:(NSError *)error {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate didGetRecordingError:error];
+    });
 }
 
 - (void)movieRecorderDidFinishRecording:(MovieRecorder *)recorder {
@@ -298,13 +299,16 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
     self.recording = NO;
     
     self.recorder = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate didStartSavingStream:self];
+    });
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     [library writeVideoAtPathToSavedPhotosAlbum:_recordingURL completionBlock:^(NSURL *assetURL, NSError *error) {
         
         [[NSFileManager defaultManager] removeItemAtURL:_recordingURL error:NULL];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate didFinishRecordingStream:self];
+            [self.delegate didFinishSavingStream:self];
         });
         
     }];

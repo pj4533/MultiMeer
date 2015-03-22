@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 #import "StreamController.h"
 #import "StreamSummary.h"
@@ -461,7 +462,33 @@ static NSString * const reuseIdentifier = @"Cell";
     [self fadeInCoverToImageView:stream.cell.coverImageView withStream:stream];
 }
 
-- (void)didFinishRecordingStream:(StreamController *)stream {
+- (void)didStartSavingStream:(StreamController *)stream {
+    [SVProgressHUD show];
+}
+
+- (void)didGetRecordingError:(NSError *)error {
+    [SVProgressHUD dismiss];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(recordTapped)];
+    
+    
+    UIAlertController * alert=   [UIAlertController alertControllerWithTitle:@"Error"
+                                                                     message:error.localizedDescription
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction *action) {
+                                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                               }];
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)didFinishSavingStream:(StreamController *)stream {
+    
+    [SVProgressHUD dismiss];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(recordTapped)];
 

@@ -14,7 +14,9 @@
 @protocol StreamControllerDelegate <NSObject>
 - (void)didBecomeLikelyToKeepUp:(StreamController*)stream;
 - (void)didBecomeUnlikelyToKeepUp:(StreamController*)stream;
-- (void)didFinishRecordingStream:(StreamController*)stream;
+- (void)didGetRecordingError:(NSError*)error;
+- (void)didStartSavingStream:(StreamController*)stream;
+- (void)didFinishSavingStream:(StreamController*)stream;
 @end
 
 @interface StreamController : NSObject
