@@ -14,6 +14,7 @@
 @protocol StreamControllerDelegate <NSObject>
 - (void)didBecomeLikelyToKeepUp:(StreamController*)stream;
 - (void)didBecomeUnlikelyToKeepUp:(StreamController*)stream;
+- (void)didFinishRecordingStream:(StreamController*)stream;
 @end
 
 @interface StreamController : NSObject
@@ -30,6 +31,10 @@
 
 - (void)addToLayer:(CALayer*)layer;
 
+- (void)startRecording;
+- (void)stopRecording;
+
+@property BOOL recording;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) StreamSummary* summary;
 

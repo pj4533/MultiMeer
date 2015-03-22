@@ -247,13 +247,21 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 - (void)appendVideoPixelBuffer:(CVPixelBufferRef)pixelBuffer withPresentationTime:(CMTime)presentationTime
 {
 	CMSampleBufferRef sampleBuffer = NULL;
-	
+    CMVideoFormatDescriptionRef videoInfo = NULL;
 	CMSampleTimingInfo timingInfo = {0,};
 	timingInfo.duration = kCMTimeInvalid;
 	timingInfo.decodeTimeStamp = kCMTimeInvalid;
 	timingInfo.presentationTimeStamp = presentationTime;
 	
-	OSStatus err = CMSampleBufferCreateForImageBuffer( kCFAllocatorDefault, pixelBuffer, true, NULL, NULL, _videoTrackSourceFormatDescription, &timingInfo, &sampleBuffer );
+    OSStatus err = CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBuffer, &videoInfo);
+    if (err != 0) {
+        NSLog(@"CMVideoFormatDescriptionCreateForImageBuffer failed! %d", (int)err);
+        return;
+    }
+    
+//    err = CMSampleBufferCreateForImageBuffer( kCFAllocatorDefault, pixelBuffer, true, NULL, NULL, _videoTrackSourceFormatDescription, &timingInfo, &sampleBuffer );
+    err = CMSampleBufferCreateForImageBuffer( kCFAllocatorDefault, pixelBuffer, true, NULL, NULL, videoInfo, &timingInfo, &sampleBuffer );
+
 	if ( sampleBuffer ) {
 		[self appendSampleBuffer:sampleBuffer ofMediaType:AVMediaTypeVideo];
 		CFRelease( sampleBuffer );
@@ -346,8 +354,8 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 	
 	@synchronized( self ) {
 		if ( _status < MovieRecorderStatusRecording ) {
-			@throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Not ready to record yet" userInfo:nil];
-			return;	
+//			@throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Not ready to record yet" userInfo:nil];
+			return;
 		}
 	}
 	

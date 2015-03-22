@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
+#import <WTGlyphFontSet/WTGlyphFontSet.h>
 
 @interface AppDelegate ()
 
@@ -20,7 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Crashlytics startWithAPIKey:@"adb3f67386076613833f7624cb7a500321ddd830"];
     [self registerDefaultsFromSettingsBundle];
-    
+    [WTGlyphFontSet loadFont:@"fontawesome" filename:@"font-awesome_4_3.ttf"];
+
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;

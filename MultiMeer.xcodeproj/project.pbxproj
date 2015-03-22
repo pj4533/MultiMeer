@@ -11,6 +11,8 @@
 		0A1306461AACA08700C18A60 /* StreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1306451AACA08700C18A60 /* StreamCell.m */; };
 		0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */; };
 		0A595E121AAB5C5900CA559B /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A595E111AAB5C5900CA559B /* StreamController.m */; };
+		0A65CE051ABF1FC9009DB457 /* font-awesome_4_3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A65CE031ABF1FC9009DB457 /* font-awesome_4_3.plist */; };
+		0A65CE061ABF1FC9009DB457 /* font-awesome_4_3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A65CE041ABF1FC9009DB457 /* font-awesome_4_3.ttf */; };
 		0A6CAE4C1AACB8AE0018C8D2 /* Broadcaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */; };
 		0A6CAE4F1AACC2E20018C8D2 /* StreamHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4E1AACC2E20018C8D2 /* StreamHeader.m */; };
 		0A9A45341AB14E2500785EC0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A9A45331AB14E2500785EC0 /* Settings.bundle */; };
@@ -44,6 +46,8 @@
 		0A595E0E1AAB47EA00CA559B /* PlayerCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerCollectionViewController.m; sourceTree = "<group>"; };
 		0A595E101AAB5C5900CA559B /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamController.h; sourceTree = "<group>"; };
 		0A595E111AAB5C5900CA559B /* StreamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamController.m; sourceTree = "<group>"; };
+		0A65CE031ABF1FC9009DB457 /* font-awesome_4_3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "font-awesome_4_3.plist"; sourceTree = "<group>"; };
+		0A65CE041ABF1FC9009DB457 /* font-awesome_4_3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font-awesome_4_3.ttf"; sourceTree = "<group>"; };
 		0A6CAE4A1AACB8AE0018C8D2 /* Broadcaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Broadcaster.h; sourceTree = "<group>"; };
 		0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Broadcaster.m; sourceTree = "<group>"; };
 		0A6CAE4D1AACC2E20018C8D2 /* StreamHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamHeader.h; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A65CE021ABF1FC9009DB457 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0A65CE031ABF1FC9009DB457 /* font-awesome_4_3.plist */,
+				0A65CE041ABF1FC9009DB457 /* font-awesome_4_3.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		0AA400141AAB37DA0070F7EF = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +148,7 @@
 		0AA400201AAB37DA0070F7EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A65CE021ABF1FC9009DB457 /* Fonts */,
 				0AA400211AAB37DA0070F7EF /* Info.plist */,
 				0AA400221AAB37DA0070F7EF /* main.m */,
 				0A9A45331AB14E2500785EC0 /* Settings.bundle */,
@@ -271,10 +285,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A65CE061ABF1FC9009DB457 /* font-awesome_4_3.ttf in Resources */,
 				0A9A45341AB14E2500785EC0 /* Settings.bundle in Resources */,
 				0AA4002C1AAB37DA0070F7EF /* Main.storyboard in Resources */,
 				0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */,
 				0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */,
+				0A65CE051ABF1FC9009DB457 /* font-awesome_4_3.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

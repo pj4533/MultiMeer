@@ -171,9 +171,9 @@ static NSString * const reuseIdentifier = @"Cell";
                 NSNumber* liveStreams = [[NSUserDefaults standardUserDefaults] objectForKey:@"livestreams"];
                 NSInteger maxPlayingStreams = liveStreams.integerValue;
                 
-//                if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+                if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
                     maxPlayingStreams = 1;
-//                }
+                }
                 
                 if (maxPlayingStreams > _streams.count) {
                     maxPlayingStreams = _streams.count;
@@ -409,6 +409,8 @@ static NSString * const reuseIdentifier = @"Cell";
             self.navigationItem.rightBarButtonItem = nil;
         }
         
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(recordTapped)];
+
         
         stream.cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
         
@@ -459,6 +461,25 @@ static NSString * const reuseIdentifier = @"Cell";
     [self fadeInCoverToImageView:stream.cell.coverImageView withStream:stream];
 }
 
+- (void)didFinishRecordingStream:(StreamController *)stream {
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(recordTapped)];
+
+    
+    UIAlertController * alert=   [UIAlertController alertControllerWithTitle:@"Finished"
+                                                                     message:@"Saved to camera roll"
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction *action) {
+                                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                                               }];
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - StreamCellDelegate
 
 - (void)didDoubleTapStream:(StreamController *)stream {
@@ -506,6 +527,18 @@ static NSString * const reuseIdentifier = @"Cell";
     [alert addAction:cancel];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)recordTapped {
+    StreamController* stream = _currentHeader.stream;
+
+    if (stream.recording) {
+        [stream stopRecording];
+    } else {
+        [stream startRecording];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Stop" style:UIBarButtonItemStylePlain target:self action:@selector(recordTapped)];
+
+    }
 }
 
 - (void)tappedActionButton {

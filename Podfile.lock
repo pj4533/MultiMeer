@@ -24,15 +24,20 @@ PODS:
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
+  - WTGlyphFontSet (0.6):
+    - WTGlyphFontSet/core (= 0.6)
+  - WTGlyphFontSet/core (0.6)
 
 DEPENDENCIES:
   - AFNetworking
   - CSStickyHeaderFlowLayout
   - Mantle
+  - WTGlyphFontSet
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   CSStickyHeaderFlowLayout: 739e87ee20cfe0c67b49d606ce47bd1f2b6efc9c
   Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
+  WTGlyphFontSet: e338636456b75694790de5ff315dc9d5c8377760
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.35.0
