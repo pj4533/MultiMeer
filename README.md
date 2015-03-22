@@ -19,6 +19,9 @@ It will update every 5 seconds looking for new streams, and remove old busted st
 
 ## Release Notes
 
+###  v1.0.1 (22)
+-  Recording video working! (no sound yet)
+
 ###  v1.0.0 (18)
 -  First App Store submission
 -  Limited to 1 stream when using cellular connection
