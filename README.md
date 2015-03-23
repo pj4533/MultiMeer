@@ -12,6 +12,7 @@ It will update every 5 seconds looking for new streams, and remove old busted st
 - Tap a cell to listen to just that stream & see details on broadcaster, tap again to listen to everything
 - Tap action icon in nav bar to view the stream in the Meerkat app
 - App settings to change number of concurrent streams (defaults to 10)
+- Tap 'Record' in top left to record video (no audio recording, YET!)
 
 ## TODO
 
