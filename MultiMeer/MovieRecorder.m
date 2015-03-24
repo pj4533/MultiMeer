@@ -388,8 +388,10 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 				if ( ! success ) {
 					NSError *error = _assetWriter.error;
 					@synchronized( self ) {
-						[self transitionToStatus:MovieRecorderStatusFailed error:error];
+                        NSLog(@"ERROR APPENDING");
+//						[self transitionToStatus:MovieRecorderStatusFailed error:error];
 					}
+                    
 				}
 			}
 			else
