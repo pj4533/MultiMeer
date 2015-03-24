@@ -516,7 +516,7 @@
 				INFOPLIST_FILE = MultiMeer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f646efeb-b7b7-43f6-8137-b5672b7f8c5a";
+				PROVISIONING_PROFILE = "0640c7c6-9276-4935-ae60-9525331e3e16";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

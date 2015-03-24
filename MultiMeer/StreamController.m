@@ -271,6 +271,7 @@ static void *PlayerStatusObservationContext = &PlayerStatusObservationContext;
         
         if (pixelBuffer) {
             [self.recorder appendVideoPixelBuffer:pixelBuffer withPresentationTime:_playerItem.currentTime];
+            CVBufferRelease(pixelBuffer);
         }
     }
 }
