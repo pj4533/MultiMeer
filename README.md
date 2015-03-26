@@ -20,6 +20,9 @@ It will update every 5 seconds looking for new streams, and remove old busted st
 
 ## Release Notes
 
+###  v1.0.1 (25)
+-  Recording NOW WITH AUDIO (Thanks to obwez for help on this)
+
 ###  v1.0.1 (24)
 -  Fixed some nasty memory issues
 
