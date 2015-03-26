@@ -15,6 +15,7 @@
 		0A65CE061ABF1FC9009DB457 /* font-awesome_4_3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A65CE041ABF1FC9009DB457 /* font-awesome_4_3.ttf */; };
 		0A6CAE4C1AACB8AE0018C8D2 /* Broadcaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */; };
 		0A6CAE4F1AACC2E20018C8D2 /* StreamHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6CAE4E1AACC2E20018C8D2 /* StreamHeader.m */; };
+		0A8137A01AC3032C00C6A0D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A81379F1AC3032C00C6A0D6 /* AVFoundation.framework */; };
 		0A9A45341AB14E2500785EC0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A9A45331AB14E2500785EC0 /* Settings.bundle */; };
 		0AA400231AAB37DA0070F7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400221AAB37DA0070F7EF /* main.m */; };
 		0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA400251AAB37DA0070F7EF /* AppDelegate.m */; };
@@ -22,8 +23,9 @@
 		0AA4002E1AAB37DA0070F7EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002D1AAB37DA0070F7EF /* Images.xcassets */; };
 		0AA400311AAB37DA0070F7EF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4002F1AAB37DA0070F7EF /* LaunchScreen.xib */; };
 		0AA4003D1AAB37DA0070F7EF /* MultiMeerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */; };
-		0AB4E85F1ABCC066008608AA /* MovieRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4E85E1ABCC066008608AA /* MovieRecorder.m */; };
+		0ACACF181AC2E2BD00209959 /* MeerkatARLDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACACF161AC2E2BD00209959 /* MeerkatARLDelegate.m */; };
 		0ADF2C181AB14C5100F83B26 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADF2C171AB14C5100F83B26 /* Crashlytics.framework */; };
+		0AF273641AC31B6800C556FC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF273631AC31B6800C556FC /* AssetsLibrary.framework */; };
 		19FC9EB793A6E4675F02A738 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C801F7B36942BC3A321B0E7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,7 @@
 		0A6CAE4B1AACB8AE0018C8D2 /* Broadcaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Broadcaster.m; sourceTree = "<group>"; };
 		0A6CAE4D1AACC2E20018C8D2 /* StreamHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamHeader.h; sourceTree = "<group>"; };
 		0A6CAE4E1AACC2E20018C8D2 /* StreamHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamHeader.m; sourceTree = "<group>"; };
+		0A81379F1AC3032C00C6A0D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0A9A45331AB14E2500785EC0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0AA4001D1AAB37DA0070F7EF /* MultiMeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiMeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA400211AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,9 +67,10 @@
 		0AA400361AAB37DA0070F7EF /* MultiMeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiMeerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA4003B1AAB37DA0070F7EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA4003C1AAB37DA0070F7EF /* MultiMeerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeerTests.m; sourceTree = "<group>"; };
-		0AB4E85D1ABCC066008608AA /* MovieRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieRecorder.h; sourceTree = "<group>"; };
-		0AB4E85E1ABCC066008608AA /* MovieRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieRecorder.m; sourceTree = "<group>"; };
+		0ACACF161AC2E2BD00209959 /* MeerkatARLDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeerkatARLDelegate.m; sourceTree = "<group>"; };
+		0ACACF171AC2E2BD00209959 /* MeerkatARLDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeerkatARLDelegate.h; sourceTree = "<group>"; };
 		0ADF2C171AB14C5100F83B26 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		0AF273631AC31B6800C556FC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3C801F7B36942BC3A321B0E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E8B642975F0E3D9811E7F9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DC5CCF9D4E73FEC125532CC1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF273641AC31B6800C556FC /* AssetsLibrary.framework in Frameworks */,
+				0A8137A01AC3032C00C6A0D6 /* AVFoundation.framework in Frameworks */,
 				0ADF2C181AB14C5100F83B26 /* Crashlytics.framework in Frameworks */,
 				19FC9EB793A6E4675F02A738 /* libPods.a in Frameworks */,
 			);
@@ -124,8 +130,8 @@
 		0AA4001F1AAB37DA0070F7EF /* MultiMeer */ = {
 			isa = PBXGroup;
 			children = (
-				0AB4E85D1ABCC066008608AA /* MovieRecorder.h */,
-				0AB4E85E1ABCC066008608AA /* MovieRecorder.m */,
+				0ACACF161AC2E2BD00209959 /* MeerkatARLDelegate.m */,
+				0ACACF171AC2E2BD00209959 /* MeerkatARLDelegate.h */,
 				0AD9EFFD1AAC8F3F00F3F197 /* Models */,
 				0AA400241AAB37DA0070F7EF /* AppDelegate.h */,
 				0AA400251AAB37DA0070F7EF /* AppDelegate.m */,
@@ -196,6 +202,8 @@
 		4E4D9DA5B07589C3F72CA5F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AF273631AC31B6800C556FC /* AssetsLibrary.framework */,
+				0A81379F1AC3032C00C6A0D6 /* AVFoundation.framework */,
 				3C801F7B36942BC3A321B0E7 /* libPods.a */,
 				0ADF2C171AB14C5100F83B26 /* Crashlytics.framework */,
 			);
@@ -354,9 +362,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACACF181AC2E2BD00209959 /* MeerkatARLDelegate.m in Sources */,
 				0A1306431AAC90C100C18A60 /* StreamSummary.m in Sources */,
 				0A1306461AACA08700C18A60 /* StreamCell.m in Sources */,
-				0AB4E85F1ABCC066008608AA /* MovieRecorder.m in Sources */,
 				0AA400261AAB37DA0070F7EF /* AppDelegate.m in Sources */,
 				0A595E0F1AAB47EA00CA559B /* PlayerCollectionViewController.m in Sources */,
 				0AA400231AAB37DA0070F7EF /* main.m in Sources */,

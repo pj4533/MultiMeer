@@ -21,10 +21,13 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CSStickyHeaderFlowLayout (0.2.4)
+  - GPAC4iOS (0.2.1)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
   - SVProgressHUD (1.1.2)
+  - TS2MP4 (0.2.1):
+    - GPAC4iOS (= 0.2.1)
   - WTGlyphFontSet (0.6):
     - WTGlyphFontSet/core (= 0.6)
   - WTGlyphFontSet/core (0.6)
@@ -34,13 +37,25 @@ DEPENDENCIES:
   - CSStickyHeaderFlowLayout
   - Mantle
   - SVProgressHUD
+  - TS2MP4 (from `https://github.com/pj4533/TS2MP4.git`)
   - WTGlyphFontSet
+
+EXTERNAL SOURCES:
+  TS2MP4:
+    :git: https://github.com/pj4533/TS2MP4.git
+
+CHECKOUT OPTIONS:
+  TS2MP4:
+    :commit: 37c6d96cb5e78e94d8d35999e6c8ad361597733d
+    :git: https://github.com/pj4533/TS2MP4.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   CSStickyHeaderFlowLayout: 739e87ee20cfe0c67b49d606ce47bd1f2b6efc9c
+  GPAC4iOS: fade1dfb45b54fda055e0c23fc30fa8a48ed8a2a
   Mantle: d5fbaf30fbc58031223af13812c060e15934a1fe
   SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
+  TS2MP4: 9cdcd34672bb2bc8968286a6f1bd1e2b6cbbdf37
   WTGlyphFontSet: e338636456b75694790de5ff315dc9d5c8377760
 
 COCOAPODS: 0.35.0
