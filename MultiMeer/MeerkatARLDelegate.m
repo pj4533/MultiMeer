@@ -13,7 +13,8 @@
 
 @interface MeerkatARLDelegate () {
     BOOL _recording;
-    NSMutableArray* _tsFiles;
+    NSMutableArray* _tsFilesOnDisk;
+    NSMutableArray* _tsFilesNotSaved;
 }
 
 @end
@@ -23,6 +24,9 @@
 -(MeerkatARLDelegate *) init {
 
     self = [super init];
+    if (self) {
+        _tsFilesNotSaved = @[].mutableCopy;
+    }
     return self;
 }
 
@@ -103,11 +107,11 @@
         NSError *error;
         if(!error)
         {
-            __block NSUInteger tsFileCount = [_tsFiles count];
+            __block NSUInteger tsFileCount = [_tsFilesOnDisk count];
             if (tsFileCount > 0)
             {
                 NSMutableArray *tsAssetList = [NSMutableArray arrayWithCapacity:tsFileCount];
-                for(NSString *tsFileName in _tsFiles)
+                for(NSString *tsFileName in _tsFilesOnDisk)
                 {
                     NSURL *tsFileURL = [NSURL URLWithString:tsFileName];
                     [tsAssetList addObject:[KMMediaAsset assetWithURL:tsFileURL withFormat:KMMediaFormatTS]];
@@ -122,6 +126,7 @@
                 tsToMP4ExportSession.outputAssets = @[mp4Asset];
                 
                 [tsToMP4ExportSession exportAsynchronouslyWithCompletionHandler:^{
+                    _tsFilesNotSaved = @[].mutableCopy;
                     if (tsToMP4ExportSession.status == KMMediaAssetExportSessionStatusCompleted) {
                         NSLog(@"COMPLETED EXPORT");
                         
@@ -132,7 +137,7 @@
                         [library writeVideoAtPathToSavedPhotosAlbum:mp4FileURL completionBlock:^(NSURL *assetURL, NSError *error) {
                             
                             [[NSFileManager defaultManager] removeItemAtPath:mp4FileURLString error:nil];
-                            for(NSString *tsFileName in _tsFiles) {
+                            for(NSString *tsFileName in _tsFilesOnDisk) {
                                 [[NSFileManager defaultManager] removeItemAtPath:tsFileName error:nil];
                             }
 
@@ -151,7 +156,16 @@
             }
         }
     } else {
-        _tsFiles = @[].mutableCopy;
+        _tsFilesOnDisk = @[].mutableCopy;
+        
+        for (NSURL* url in _tsFilesNotSaved) {
+            // abstract this
+            NSLog(@"Adding unsaved:  %@", url);
+            NSString* tsDataPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:url.lastPathComponent];
+            NSData *tsData = [NSData dataWithContentsOfURL:url];
+            [tsData writeToFile:tsDataPath atomically:YES];
+            [_tsFilesOnDisk addObject:tsDataPath];
+        }
     }
 }
 
@@ -169,18 +183,17 @@
         
         
         // HACK ALERT
+        NSString* tsDataPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:redirect.URL.lastPathComponent];
         if (self.recording) {
             // TODO: PJ, you can start to download the chunks by implementing a simple
             // download queue system here.
-            NSLog(@"AVAssetResourceLoadingRequest: %@",[redirect URL]);
-
-            NSData *tsData = [NSData dataWithContentsOfURL:[redirect URL]];
-            NSString* tsDataPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:redirect.URL.lastPathComponent];
-            
             NSLog(@"SAVED TO FILE: %@", tsDataPath);
+            NSData *tsData = [NSData dataWithContentsOfURL:[redirect URL]];
             [tsData writeToFile:tsDataPath atomically:YES];
             
-            [_tsFiles addObject:tsDataPath];
+            [_tsFilesOnDisk addObject:tsDataPath];
+        } else {
+            [_tsFilesNotSaved addObject:redirect.URL];
         }
         
         // NOTE: After several hours of digging I found that you CANNOT pass HLS chunks directly
