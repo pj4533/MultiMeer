@@ -1,3 +1,10 @@
+
+# REMOVED FROM APP STORE
+
+Looks like they changed the API.  I haven't looked in Charles to see how...someone else is welcome to pull request a fix!
+
+
+
 # MultiMeer
 Meerkat All The Things
 
